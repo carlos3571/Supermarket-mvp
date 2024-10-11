@@ -17,28 +17,29 @@ namespace Supermarket_mvp.Views
         private bool isEdit;
         private bool isSuccesful;
         private string message;
-        
+
         public PayModeView()
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPagePayModeDetail);
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         // métodos de la clase
         private void AssociateAndRaiseViewEvents()
         {
             BtnSearch.Click += delegate
-            {SearchEvent?.Invoke(this, EventArgs.Empty);};
+            { SearchEvent?.Invoke(this, EventArgs.Empty); };
 
-        TxtSearch.KeyDown += (s, e) =>
-            {
-                if (e.KeyCode == Keys.Enter)
+            TxtSearch.KeyDown += (s, e) =>
                 {
-                    SearchEvent?.Invoke(this, EventArgs.Empty);
-                }
-            };
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        SearchEvent?.Invoke(this, EventArgs.Empty);
+                    }
+                };
         }
         public string PayModeId
         {
@@ -95,11 +96,14 @@ namespace Supermarket_mvp.Views
         // Patron singleton para controlar solo una instancia del formulario        
         private static PayModeView _instance;
 
-        public static PayModeView GetInstance()
+        public static PayModeView GetInstance(Form parentContainer)
         {
             if (_instance == null || _instance.IsDisposed)
             {
                 _instance = new PayModeView();
+                _instance.MdiParent = parentContainer;
+                _instance.FormBorderStyle = FormBorderStyle.None;
+                _instance.Dock = DockStyle.Fill;
             }
             else
             {
@@ -112,5 +116,9 @@ namespace Supermarket_mvp.Views
             return _instance;
         }
 
+        private void PayModeView_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
