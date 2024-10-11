@@ -535,4 +535,53 @@ Tejedores de comida.xsd
 ### Parche de Visual Studio ###
 # Archivos adicionales creados por Visual Studio
 
+
+# Visual Studio specific
+*.suo
+*.user
+*.vshost.exe
+*.webinfo
+_PublishedWebsites
+*.db
+*.pdb
+*.log
+*.cache
+*.scc
+*.vspscc
+*.userprefs
+*.tmp
+*.obj
+*.csproj.user
+*.vbproj.user
+*.sln.user
+*.ipk
+*.tlog
+*.vsmdi
+*.vsi
+*.vsix
+*.vsct
+*.vsx
+*.tt
+*.ttinclude
+*.resx
+
+# Common file types
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.config
+*.user
+*.bak
+*.tmp
+*.swp
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Visual Studio Code specific
+.vs/
+
 # Fin de https://www.toptal.com/developers/gitignore/api/visualstudio,aspnetcore,dotnetcore
