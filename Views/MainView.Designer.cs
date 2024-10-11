@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            BtnExit = new Button();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
-            BtnExit = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -49,6 +49,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 450);
             panel1.TabIndex = 0;
+            // 
+            // BtnExit
+            // 
+            BtnExit.BackgroundImage = Properties.Resources.cerrar_sesion;
+            BtnExit.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnExit.Dock = DockStyle.Bottom;
+            BtnExit.Location = new Point(0, 390);
+            BtnExit.Name = "BtnExit";
+            BtnExit.Size = new Size(200, 60);
+            BtnExit.TabIndex = 4;
+            BtnExit.UseVisualStyleBackColor = true;
             // 
             // pictureBox2
             // 
@@ -77,17 +88,6 @@
             BtnPayMode.Size = new Size(194, 81);
             BtnPayMode.TabIndex = 2;
             BtnPayMode.UseVisualStyleBackColor = true;
-            // 
-            // BtnExit
-            // 
-            BtnExit.BackgroundImage = Properties.Resources.cerrar_sesion;
-            BtnExit.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnExit.Dock = DockStyle.Bottom;
-            BtnExit.Location = new Point(0, 390);
-            BtnExit.Name = "BtnExit";
-            BtnExit.Size = new Size(200, 60);
-            BtnExit.TabIndex = 4;
-            BtnExit.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 

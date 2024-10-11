@@ -58,7 +58,7 @@ namespace Supermarket_mvp.Presenters
 
         private void AddNewPayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Hizo clic en el boton nuevo");
         }
 
         private void SearchPayMode(object? sender, EventArgs e)
