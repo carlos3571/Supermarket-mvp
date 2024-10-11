@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Supermarket_mvp.Views; 
 using Supermarket_mvp.Models;
-using Supermarket_mvp.Views;
 using Supermarket_mvp._Repositories;
 using NuGet.Protocol.Plugins;
 
@@ -27,7 +26,7 @@ namespace Supermarket_mvp.Presenters
 
         private void ShowPayModeview(object? sender, EventArgs e)
         {
-            IPayModeView view = new PayModeView();
+            IPayModeView view = PayModeView.GetInstance();
             IPayModeRepository repository = new PayModeRepository(sqlConnectionString);
             new PayModePresenter(view, repository);
         }

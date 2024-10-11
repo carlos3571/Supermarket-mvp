@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Supermarket_mvp.Views
         private bool isEdit;
         private bool isSuccesful;
         private string message;
+        
         public PayModeView()
         {
             InitializeComponent();
@@ -64,10 +66,11 @@ namespace Supermarket_mvp.Views
             get { return isEdit; }
             set { IsEdit = value; }
         }
-        public bool IsSuccesful
+
+        public bool IsSuccessful
         {
             get { return isSuccesful; }
-            set { IsSuccesful = value; }
+            set { isSuccesful = value; }  // Aquí debes asignar a la variable `isSuccesful`
         }
         public string Message
         {
@@ -76,7 +79,7 @@ namespace Supermarket_mvp.Views
         }
 
         public string PayModeObdervation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool IsSuccessful { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //public bool IsSuccessful { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
@@ -89,5 +92,25 @@ namespace Supermarket_mvp.Views
         {
             DgPayMode.DataSource = payModeList;
         }
+        // Patron singleton para controlar solo una instancia del formulario        
+        private static PayModeView _instance;
+
+        public static PayModeView GetInstance()
+        {
+            if (_instance == null || _instance.IsDisposed)
+            {
+                _instance = new PayModeView();
+            }
+            else
+            {
+                if (_instance.WindowState == FormWindowState.Minimized)
+                {
+                    _instance.WindowState = FormWindowState.Normal;
+                }
+                _instance.BringToFront();
+            }
+            return _instance;
+        }
+
     }
 }

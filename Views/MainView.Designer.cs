@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
-            pictureBox2 = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -47,6 +47,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 450);
             panel1.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImage = Properties.Resources.buy;
+            pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox2.Location = new Point(3, 59);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(194, 81);
+            pictureBox2.TabIndex = 3;
+            pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -66,16 +76,6 @@
             BtnPayMode.TabIndex = 2;
             BtnPayMode.UseVisualStyleBackColor = true;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.BackgroundImage = Properties.Resources.buy;
-            pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Location = new Point(3, 59);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(194, 81);
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -84,9 +84,11 @@
             Controls.Add(panel1);
             Name = "MainView";
             Text = "Supermarket";
+            WindowState = FormWindowState.Minimized;
+            Load += MainView_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
