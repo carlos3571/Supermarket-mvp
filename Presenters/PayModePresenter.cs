@@ -58,7 +58,7 @@ namespace Supermarket_mvp.Presenters
 
         private void AddNewPayMode(object? sender, EventArgs e)
         {
-            MessageBox.Show("Hizo clic en el boton nuevo");
+            view.IsEdit = false;
         }
 
         private void SearchPayMode(object? sender, EventArgs e)
