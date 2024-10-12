@@ -43,8 +43,8 @@ namespace Supermarket_mvp._Repositories
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla
                     command.CommandText = "INSERT INTO PayMode (Pay_Mode_Name, Pay_Mode_Observation) VALUES (@name, @observation)";
-                    command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeModel.Name;
-                    command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = payModeModel.Observation;
+                    command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeModel.PayModeName;
+                    command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = payModeModel.PayModeObservation;
                     command.ExecuteNonQuery();
                 }
             }
@@ -76,8 +76,8 @@ namespace Supermarket_mvp._Repositories
                                        SET Pay_Mode_Name =@name,
                                        Pay_Mode_Observation = @observation
                                        WHERE Pay_Mode_Id =@id";
-                command.Parameters.Add("@name", SqlDbType.NVarChar).Value=payModeModel.Name;
-                command.Parameters.Add("@observation", SqlDbType.NVarChar).Value= payModeModel.Observation;
+                command.Parameters.Add("@name", SqlDbType.NVarChar).Value=payModeModel.PayModeName;
+                command.Parameters.Add("@observation", SqlDbType.NVarChar).Value= payModeModel.PayModeObservation;
                 command.Parameters.Add("@id", SqlDbType.Int).Value = payModeModel.Id;
                 command.ExecuteNonQuery();
             }
@@ -98,8 +98,8 @@ namespace Supermarket_mvp._Repositories
                     {
                         var payModeModel = new PayModeModel();
                         payModeModel.Id = (int)reader["Pay_Mode_Id"];
-                        payModeModel.Name = reader["Pay_Mode_Name"].ToString();
-                        payModeModel.Observation = reader["Pay_Mode_Observation"].ToString();
+                        payModeModel.PayModeName = reader["Pay_Mode_Name"].ToString();
+                        payModeModel.PayModeObservation = reader["Pay_Mode_Observation"].ToString();
                         payModeList.Add(payModeModel);
                     }
                 }
@@ -131,8 +131,8 @@ namespace Supermarket_mvp._Repositories
                     {
                         var payModeModel = new PayModeModel();
                         payModeModel.Id = (int)reader["Pay_Mode_Id"];
-                        payModeModel.Name = reader["Pay_Mode_Name"].ToString();
-                        payModeModel.Observation = reader["Pay_Mode_Observation"].ToString();
+                        payModeModel.PayModeName = reader["Pay_Mode_Name"].ToString();
+                        payModeModel.PayModeObservation = reader["Pay_Mode_Observation"].ToString();
                         payModeList.Add(payModeModel);
                     }
                 }

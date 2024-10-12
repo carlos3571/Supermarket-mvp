@@ -101,21 +101,23 @@ namespace Supermarket_mvp.Views
 
             BtnSave.Click += delegate
             {
-                // Verifica si los campos están llenos antes de intentar guardar
+                // Verifica si los campos están vacíos antes de intentar guardar
                 if (string.IsNullOrWhiteSpace(TxtPayModeName.Text) || string.IsNullOrWhiteSpace(TxtPayModeObservation.Text))
                 {
-                    MessageBox.Show("Por favor completa todos los campos antes de guardar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Detiene el proceso de guardado si los campos están vacíos
+                    MessageBox.Show("Pay Mode Name and Pay Mode Observation are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Detener el proceso de guardado
                 }
 
-                SaveEvent?.Invoke(this, EventArgs.Empty);  // Llama el evento de guardar
+                // Invoca el evento de guardado
+                SaveEvent?.Invoke(this, EventArgs.Empty);
 
-                // Verifica si el guardado fue exitoso
+                // Verifica si la operación fue exitosa
                 if (IsSuccessful)
                 {
+                    // Guardado exitoso, volver a la lista de modos de pago
                     tabControl1.TabPages.Remove(tabPagePayModeDetail);
                     tabControl1.TabPages.Add(tabPagePayModeList);
-                    MessageBox.Show("Modo de pago guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Pay Mode saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {

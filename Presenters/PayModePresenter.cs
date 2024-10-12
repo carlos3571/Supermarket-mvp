@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Supermarket_mvp.Views;
 using Supermarket_mvp.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Supermarket_mvp.Presenters
 {
@@ -17,18 +18,22 @@ namespace Supermarket_mvp.Presenters
         private IEnumerable<PayModeModel> payModeList;
 
         public PayModePresenter(IPayModeView view, IPayModeRepository repository)
-
         {
             this.payModeBindingSource = new BindingSource();
             this.view = view;
             this.repository = repository;
 
-            this.view.SearchEvent += SearchPayMode;
+            //this.view.SearchEvent += SearchPayMode;
+            //this.view.AddNewEvent += AddNewPayMode;
+            //this.view.EditEvent += LoadSelectPayModeToEdit;
+            //this.view.SaveEvent += SavePayMode;
+            //this.view.CancelEvent += CancelAction;
             this.view.AddNewEvent += AddNewPayMode;
-            this.view.EditEvent += LoadSelectPayModeToEdit;
             this.view.SaveEvent += SavePayMode;
+            this.view.EditEvent += LoadSelectPayModeToEdit;
+            this.view.DeleteEvent += DelectedSelectedPayMode;
+            this.view.SearchEvent += SearchPayMode;
             this.view.CancelEvent += CancelAction;
-
 
             this.view.SetPayModeListBildingSource(payModeBindingSource);
 
@@ -47,13 +52,14 @@ namespace Supermarket_mvp.Presenters
             CleanViewFields();
         }
 
-        
         private void SavePayMode(object? sender, EventArgs e)
         {
-            var payMode = new PayModeModel();
-            payMode.Id = Convert.ToInt32(view.PayModeId);
-            payMode.Name = view.PayModeName;
-            payMode.Observation = view.PayModeObservation;
+            var payMode = new PayModeModel
+            {
+                Id = Convert.ToInt32(view.PayModeId),
+                PayModeName = view.PayModeName,
+                PayModeObservation = view.PayModeObservation
+            };
 
             try
             {
@@ -70,48 +76,48 @@ namespace Supermarket_mvp.Presenters
                     repository.Add(payMode);
                     view.Message = "Modo de pago agregado exitosamente";
                 }
+
                 view.IsSuccessful = true;
                 LoadAllPayModeList();
                 CleanViewFields();
             }
+            catch (ValidationException ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = $"Error de validación: {ex.Message}";
+            }
             catch (Exception ex)
             {
                 view.IsSuccessful = false;
-                view.Message = ex.Message;
+                view.Message = $"Error inesperado: {ex.Message}";
             }
         }
-
 
         private void CleanViewFields()
         {
             view.PayModeId = "0";
-            view.PayModeName = "";
-            view.PayModeObservation = "";
+            view.PayModeName = string.Empty;
+            view.PayModeObservation = string.Empty;
         }
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
         {
             // Se verifica que el objeto seleccionado no sea nulo.
-            if (payModeBindingSource.Current != null)
+            if (payModeBindingSource.Current == null)
             {
-                // Se obtiene el objeto del datagridview que se encuentra seleccionado.
-                var payMode = (PayModeModel)payModeBindingSource.Current;
-
-                // Se valida que los campos no sean nulos antes de asignarlos.
-                view.PayModeId = payMode.Id.ToString();
-                view.PayModeName = payMode.Name ?? string.Empty;
-                view.PayModeObservation = payMode.Observation ?? string.Empty;
-
-                // Se establece el modo como edición.
-                view.IsEdit = true;
-            }
-            else
-            {
-                // Si no hay un modo de pago seleccionado, lanzar un mensaje de error o manejar la situación.
                 view.Message = "No se ha seleccionado ningún modo de pago para editar.";
+                return;
             }
-        }
 
+            var payMode = (PayModeModel)payModeBindingSource.Current;
+
+            // Asignar valores a los campos
+            view.PayModeId = payMode.Id.ToString();
+            view.PayModeName = payMode.PayModeName ?? string.Empty;
+            view.PayModeObservation = payMode.PayModeObservation ?? string.Empty;
+
+            view.IsEdit = true;
+        }
 
         public void AddNewPayMode(object sender, EventArgs e)
         {
@@ -122,8 +128,6 @@ namespace Supermarket_mvp.Presenters
 
             view.IsEdit = false; // Establece el modo de edición en falso.
         }
-
-
 
         private void SearchPayMode(object? sender, EventArgs e)
         {
@@ -142,25 +146,29 @@ namespace Supermarket_mvp.Presenters
 
         private void DelectedSelectedPayMode(object? sender, EventArgs e)
         {
+            if (payModeBindingSource.Current == null)
+            {
+                view.Message = "No hay un modo de pago seleccionado para eliminar.";
+                view.IsSuccessful = false;
+                return;
+            }
+
             try
             {
-                //se recupera el objeto de la fila seleccionada del dataviewgrid
+                // Se recupera el objeto de la fila seleccionada del dataviewgrid
                 var payMode = (PayModeModel)payModeBindingSource.Current;
 
-                //se invoca el metodo Delete del repositorio pasando el ID del pay mode
+                // Se invoca el método Delete del repositorio pasando el ID del pay mode
                 repository.Delete(payMode.Id);
                 view.IsSuccessful = true;
-                view.Message = "modo de pago eliminado exitosamente";
+                view.Message = "Modo de pago eliminado exitosamente";
                 LoadAllPayModeList();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 view.IsSuccessful = false;
-                view.Message = "ocurrió un error, no se pudo eliminar el modo de pago";
+                view.Message = $"Ocurrió un error: {ex.Message}";
             }
-            
-            
         }
     }
 }
-
