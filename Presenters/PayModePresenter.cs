@@ -49,12 +49,11 @@ namespace Supermarket_mvp.Presenters
 
         private void SavePayMode(object? sender, EventArgs e)
         {
-            //se crea un objeto de la clase PayModeModel y se asigna los datos
-            //de las cajas de texto de la vista
             var payMode = new PayModeModel();
             payMode.Id = Convert.ToInt32(view.PayModeId);
-            payMode.Name = view.PayModeName;
-            payMode.Observation = view.PayModeObservation;
+            payMode.Name = view.PayModeName;  // Asegúrate de que no sea nulo o vacío
+            payMode.Observation = view.PayModeObservation;  // Asegúrate de que no sea nulo o vacío
+
 
             try
             {
@@ -91,17 +90,27 @@ namespace Supermarket_mvp.Presenters
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
         {
-            //se obtiene el objeto del datagridview que se encuentra seleccionado
-            var payMode = (PayModeModel)payModeBindingSource.Current;
+            // Se verifica que el objeto seleccionado no sea nulo.
+            if (payModeBindingSource.Current != null)
+            {
+                // Se obtiene el objeto del datagridview que se encuentra seleccionado.
+                var payMode = (PayModeModel)payModeBindingSource.Current;
 
-            //se cambia el contenido de las cajas de texto por el objeto recuperado
-            // del datagridview
-            view.PayModeId = payMode.Id.ToString();
-            view.PayModeName = payMode.Name;
-            view.PayModeObservation = payMode.Observation;
-            //SE ESTABLECE EL MODO COMO EDICION
-            view.IsEdit = true;
+                // Se valida que los campos no sean nulos antes de asignarlos.
+                view.PayModeId = payMode.Id.ToString();
+                view.PayModeName = payMode.Name ?? string.Empty;
+                view.PayModeObservation = payMode.Observation ?? string.Empty;
+
+                // Se establece el modo como edición.
+                view.IsEdit = true;
+            }
+            else
+            {
+                // Si no hay un modo de pago seleccionado, lanzar un mensaje de error o manejar la situación.
+                view.Message = "No se ha seleccionado ningún modo de pago para editar.";
+            }
         }
+
 
         public void AddNewPayMode(object sender, EventArgs e)
         {

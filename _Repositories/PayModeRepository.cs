@@ -41,13 +41,15 @@ namespace Supermarket_mvp._Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO PayMode (Name, Observation) VALUES (@name, @observation)";
+                    // Ajustamos los nombres de las columnas según la estructura de la tabla
+                    command.CommandText = "INSERT INTO PayMode (Pay_Mode_Name, Pay_Mode_Observation) VALUES (@name, @observation)";
                     command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeModel.Name;
                     command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = payModeModel.Observation;
                     command.ExecuteNonQuery();
                 }
             }
         }
+
 
 
         public void Delete(int id)

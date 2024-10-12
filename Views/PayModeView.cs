@@ -44,11 +44,24 @@ namespace Supermarket_mvp.Views
             //agregar llame el evento AddNewEvent cuando se haga clic en el boton BtnNew
             BtnNew.Click += delegate
             {
-                AddNewEvent?.Invoke(this, EventArgs.Empty); // Lanza el evento que será manejado en el Presenter.
-                tabControl1.TabPages.Remove(tabPagePayModeList); // Oculta la lista de modos de pago.
-                tabControl1.TabPages.Add(tabPagePayModeDetail); // Muestra la pestaña para agregar nuevo modo de pago.
-                tabPagePayModeDetail.Text = "Agregar nuevo modo de pago"; // Cambia el título de la pestaña.
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+                // Remueve la pestaña de lista si está presente
+                if (tabControl1.TabPages.Contains(tabPagePayModeList))
+                {
+                    tabControl1.TabPages.Remove(tabPagePayModeList);
+                }
+
+                // Añade la pestaña de detalles si no está ya añadida
+                if (!tabControl1.TabPages.Contains(tabPagePayModeDetail))
+                {
+                    tabControl1.TabPages.Add(tabPagePayModeDetail);
+                }
+
+                tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
             };
+
+
 
 
             BtnEdit.Click += delegate
@@ -88,11 +101,49 @@ namespace Supermarket_mvp.Views
 
             BtnCancel.Click += delegate
             {
+                // Cancelar y volver a la lista
                 CancelEvent?.Invoke(this, EventArgs.Empty);
 
                 tabControl1.TabPages.Remove(tabPagePayModeDetail);
-                tabControl1.TabPages.Add(tabPagePayModeDetail);
+                tabControl1.TabPages.Add(tabPagePayModeList);
             };
+
+            //BtnSave.Click += delegate
+            //{
+            //    SaveEvent?.Invoke(this, EventArgs.Empty);
+
+            //    if (isSuccesful)
+            //    {
+            //        // Guardar exitoso, volver a la lista
+            //        tabControl1.TabPages.Remove(tabPagePayModeDetail);
+            //        tabControl1.TabPages.Add(tabPagePayModeList);
+            //    }
+            //};
+
+
+            BtnSave.Click += delegate
+            {
+                SaveEvent?.Invoke(this, EventArgs.Empty);  // Invoca el evento de guardado
+
+                // Verifica si la operación fue exitosa
+                if (IsSuccessful)  // O bien: if (view.IsSuccessful)
+                {
+                    // Guardado exitoso, volver a la lista de modos de pago
+                    tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                    tabControl1.TabPages.Add(tabPagePayModeList);
+
+                    // Mensaje de confirmación para el usuario
+                    MessageBox.Show("Modo de pago guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Guardado fallido, mostrar mensaje de error
+                    MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+
+
+
 
         }
         public string PayModeId
@@ -183,14 +234,37 @@ namespace Supermarket_mvp.Views
         //    tabControl1.TabPages.Add(tabPagePayModeDetail);
         //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
         //}
+        //private void PayModeView_Load(object sender, EventArgs e)
+        //{
+        //   // tabControl1.TabPages.Add(tabPagePayModeDetail);
+        //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
+        //}
         private void PayModeView_Load(object sender, EventArgs e)
         {
-            // Asegúrate de que la pestaña de detalles no esté visible al cargar el formulario
-            if (tabControl1.TabPages.Contains(tabPagePayModeDetail))
+            // Si estamos en modo de edición, se cargará la pestaña de edición
+            if (isEdit)
             {
-                tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                if (!tabControl1.TabPages.Contains(tabPagePayModeDetail))
+                {
+                    tabControl1.TabPages.Add(tabPagePayModeDetail);
+                }
+
+                tabPagePayModeDetail.Text = "Editar modo de pago";
             }
+            else
+            {
+                if (!tabControl1.TabPages.Contains(tabPagePayModeDetail))
+                {
+                    tabControl1.TabPages.Add(tabPagePayModeDetail);
+                }
+
+                tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
+            }
+
+            
         }
+
+
 
 
 
@@ -238,6 +312,25 @@ namespace Supermarket_mvp.Views
             tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
         }
 
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            // Invocas el evento SaveEvent que será manejado por el Presenter
+            SaveEvent?.Invoke(this, EventArgs.Empty);
+
+            // Luego puedes mostrar un mensaje de confirmación si el guardado fue exitoso
+            if (isSuccesful) // Si Grabar fue exitoso
+            {
+                MessageBox.Show("El modo de pago se ha guardado correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Puedes volver a la pestaña principal de la lista
+                tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                tabControl1.TabPages.Add(tabPagePayModeList);
+            }
+            else
+            {
+                MessageBox.Show("Ocurrió un error al guardar el modo de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
 
