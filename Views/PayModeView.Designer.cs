@@ -121,46 +121,50 @@
             // BtnClose
             // 
             BtnClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnClose.BackColor = Color.IndianRed;
             BtnClose.BackgroundImage = Properties.Resources.cerrar_sesion1;
             BtnClose.BackgroundImageLayout = ImageLayout.Zoom;
             BtnClose.Location = new Point(504, 268);
             BtnClose.Name = "BtnClose";
             BtnClose.Size = new Size(91, 46);
             BtnClose.TabIndex = 8;
-            BtnClose.UseVisualStyleBackColor = true;
+            BtnClose.UseVisualStyleBackColor = false;
             // 
             // BtnDelete
             // 
             BtnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnDelete.BackColor = Color.Aquamarine;
             BtnDelete.BackgroundImage = Properties.Resources.eliminar;
             BtnDelete.BackgroundImageLayout = ImageLayout.Zoom;
             BtnDelete.Location = new Point(504, 196);
             BtnDelete.Name = "BtnDelete";
             BtnDelete.Size = new Size(91, 46);
             BtnDelete.TabIndex = 7;
-            BtnDelete.UseVisualStyleBackColor = true;
+            BtnDelete.UseVisualStyleBackColor = false;
             // 
             // BtnEdit
             // 
             BtnEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnEdit.BackColor = Color.Khaki;
             BtnEdit.BackgroundImage = (Image)resources.GetObject("BtnEdit.BackgroundImage");
             BtnEdit.BackgroundImageLayout = ImageLayout.Zoom;
             BtnEdit.Location = new Point(504, 130);
             BtnEdit.Name = "BtnEdit";
             BtnEdit.Size = new Size(91, 49);
             BtnEdit.TabIndex = 6;
-            BtnEdit.UseVisualStyleBackColor = true;
+            BtnEdit.UseVisualStyleBackColor = false;
             // 
             // BtnNew
             // 
             BtnNew.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnNew.BackColor = Color.GreenYellow;
             BtnNew.BackgroundImage = (Image)resources.GetObject("BtnNew.BackgroundImage");
             BtnNew.BackgroundImageLayout = ImageLayout.Zoom;
             BtnNew.Location = new Point(504, 67);
             BtnNew.Name = "BtnNew";
             BtnNew.Size = new Size(91, 47);
             BtnNew.TabIndex = 5;
-            BtnNew.UseVisualStyleBackColor = true;
+            BtnNew.UseVisualStyleBackColor = false;
             // 
             // DgPayMode
             // 
@@ -168,6 +172,7 @@
             DgPayMode.AllowUserToDeleteRows = false;
             DgPayMode.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DgPayMode.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DgPayMode.BackgroundColor = SystemColors.GradientActiveCaption;
             DgPayMode.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgPayMode.Location = new Point(8, 67);
             DgPayMode.Name = "DgPayMode";
@@ -178,17 +183,19 @@
             // BtnSearch
             // 
             BtnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnSearch.BackColor = Color.Khaki;
             BtnSearch.BackgroundImage = Properties.Resources.search;
             BtnSearch.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnSearch.Location = new Point(388, 12);
+            BtnSearch.Location = new Point(388, 6);
             BtnSearch.Name = "BtnSearch";
             BtnSearch.Size = new Size(75, 49);
             BtnSearch.TabIndex = 2;
-            BtnSearch.UseVisualStyleBackColor = true;
+            BtnSearch.UseVisualStyleBackColor = false;
             // 
             // TxtSearch
             // 
             TxtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TxtSearch.BackColor = SystemColors.Info;
             TxtSearch.Location = new Point(8, 32);
             TxtSearch.Name = "TxtSearch";
             TxtSearch.PlaceholderText = "Data to search";
