@@ -28,27 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PayModeView));
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             tabControl1 = new TabControl();
             tabPagePayModeList = new TabPage();
-            pictureBox6 = new PictureBox();
-            pictureBox5 = new PictureBox();
-            pictureBox4 = new PictureBox();
-            pictureBox3 = new PictureBox();
             BtnClose = new Button();
             BtnDelete = new Button();
             BtnEdit = new Button();
             BtnNew = new Button();
             DgPayMode = new DataGridView();
-            pictureBox2 = new PictureBox();
             BtnSearch = new Button();
             TxtSearch = new TextBox();
             label2 = new Label();
             tabPagePayModeDetail = new TabPage();
-            pictureBox8 = new PictureBox();
-            pictureBox7 = new PictureBox();
             BtnCancel = new Button();
             BtnSave = new Button();
             TxtPayModeObservation = new TextBox();
@@ -61,15 +55,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPagePayModeList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DgPayMode).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             tabPagePayModeDetail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -115,16 +102,11 @@
             // 
             // tabPagePayModeList
             // 
-            tabPagePayModeList.Controls.Add(pictureBox6);
-            tabPagePayModeList.Controls.Add(pictureBox5);
-            tabPagePayModeList.Controls.Add(pictureBox4);
-            tabPagePayModeList.Controls.Add(pictureBox3);
             tabPagePayModeList.Controls.Add(BtnClose);
             tabPagePayModeList.Controls.Add(BtnDelete);
             tabPagePayModeList.Controls.Add(BtnEdit);
             tabPagePayModeList.Controls.Add(BtnNew);
             tabPagePayModeList.Controls.Add(DgPayMode);
-            tabPagePayModeList.Controls.Add(pictureBox2);
             tabPagePayModeList.Controls.Add(BtnSearch);
             tabPagePayModeList.Controls.Add(TxtSearch);
             tabPagePayModeList.Controls.Add(label2);
@@ -136,49 +118,11 @@
             tabPagePayModeList.Text = "Pay Mode List ";
             tabPagePayModeList.UseVisualStyleBackColor = true;
             // 
-            // pictureBox6
-            // 
-            pictureBox6.Image = Properties.Resources.cerrar;
-            pictureBox6.Location = new Point(534, 278);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(29, 25);
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.TabIndex = 12;
-            pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.Image = Properties.Resources.delete;
-            pictureBox5.Location = new Point(531, 206);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(37, 27);
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.TabIndex = 11;
-            pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.edit;
-            pictureBox4.Location = new Point(531, 139);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(36, 30);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 10;
-            pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources._new;
-            pictureBox3.Location = new Point(531, 76);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(32, 29);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 9;
-            pictureBox3.TabStop = false;
-            // 
             // BtnClose
             // 
             BtnClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnClose.BackgroundImage = Properties.Resources.cerrar_sesion1;
+            BtnClose.BackgroundImageLayout = ImageLayout.Zoom;
             BtnClose.Location = new Point(504, 268);
             BtnClose.Name = "BtnClose";
             BtnClose.Size = new Size(91, 46);
@@ -188,6 +132,8 @@
             // BtnDelete
             // 
             BtnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnDelete.BackgroundImage = Properties.Resources.eliminar;
+            BtnDelete.BackgroundImageLayout = ImageLayout.Zoom;
             BtnDelete.Location = new Point(504, 196);
             BtnDelete.Name = "BtnDelete";
             BtnDelete.Size = new Size(91, 46);
@@ -197,6 +143,8 @@
             // BtnEdit
             // 
             BtnEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnEdit.BackgroundImage = (Image)resources.GetObject("BtnEdit.BackgroundImage");
+            BtnEdit.BackgroundImageLayout = ImageLayout.Zoom;
             BtnEdit.Location = new Point(504, 130);
             BtnEdit.Name = "BtnEdit";
             BtnEdit.Size = new Size(91, 49);
@@ -206,6 +154,8 @@
             // BtnNew
             // 
             BtnNew.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnNew.BackgroundImage = (Image)resources.GetObject("BtnNew.BackgroundImage");
+            BtnNew.BackgroundImageLayout = ImageLayout.Zoom;
             BtnNew.Location = new Point(504, 67);
             BtnNew.Name = "BtnNew";
             BtnNew.Size = new Size(91, 47);
@@ -225,19 +175,11 @@
             DgPayMode.Size = new Size(455, 247);
             DgPayMode.TabIndex = 4;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.search_small;
-            pictureBox2.Location = new Point(408, 24);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(32, 31);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
             // BtnSearch
             // 
             BtnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BtnSearch.BackgroundImage = Properties.Resources.search;
+            BtnSearch.BackgroundImageLayout = ImageLayout.Zoom;
             BtnSearch.Location = new Point(388, 12);
             BtnSearch.Name = "BtnSearch";
             BtnSearch.Size = new Size(75, 49);
@@ -265,8 +207,6 @@
             // 
             // tabPagePayModeDetail
             // 
-            tabPagePayModeDetail.Controls.Add(pictureBox8);
-            tabPagePayModeDetail.Controls.Add(pictureBox7);
             tabPagePayModeDetail.Controls.Add(BtnCancel);
             tabPagePayModeDetail.Controls.Add(BtnSave);
             tabPagePayModeDetail.Controls.Add(TxtPayModeObservation);
@@ -283,28 +223,10 @@
             tabPagePayModeDetail.Text = "Pay Mode Detail";
             tabPagePayModeDetail.UseVisualStyleBackColor = true;
             // 
-            // pictureBox8
-            // 
-            pictureBox8.Image = Properties.Resources.cancel;
-            pictureBox8.Location = new Point(151, 273);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(35, 28);
-            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox8.TabIndex = 9;
-            pictureBox8.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            pictureBox7.Image = Properties.Resources.save;
-            pictureBox7.Location = new Point(41, 273);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(29, 28);
-            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox7.TabIndex = 8;
-            pictureBox7.TabStop = false;
-            // 
             // BtnCancel
             // 
+            BtnCancel.BackgroundImage = Properties.Resources.cancelar;
+            BtnCancel.BackgroundImageLayout = ImageLayout.Zoom;
             BtnCancel.Location = new Point(128, 262);
             BtnCancel.Name = "BtnCancel";
             BtnCancel.Size = new Size(90, 52);
@@ -313,6 +235,8 @@
             // 
             // BtnSave
             // 
+            BtnSave.BackgroundImage = Properties.Resources.guardar;
+            BtnSave.BackgroundImageLayout = ImageLayout.Zoom;
             BtnSave.Location = new Point(19, 262);
             BtnSave.Name = "BtnSave";
             BtnSave.Size = new Size(87, 52);
@@ -389,16 +313,9 @@
             tabControl1.ResumeLayout(false);
             tabPagePayModeList.ResumeLayout(false);
             tabPagePayModeList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)DgPayMode).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             tabPagePayModeDetail.ResumeLayout(false);
             tabPagePayModeDetail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
         }
 
@@ -413,24 +330,17 @@
         private Label label2;
         private TextBox TxtSearch;
         private Button BtnSearch;
-        private PictureBox pictureBox2;
         private DataGridView DgPayMode;
-        private PictureBox pictureBox3;
         private Button BtnClose;
         private Button BtnDelete;
         private Button BtnEdit;
         private Button BtnNew;
-        private PictureBox pictureBox6;
-        private PictureBox pictureBox5;
-        private PictureBox pictureBox4;
         private TextBox TxtPayModeName;
         private Label label4;
         private TextBox TxtPayModeId;
         private Label label3;
         private TextBox TxtPayModeObservation;
         private Label label5;
-        private PictureBox pictureBox8;
-        private PictureBox pictureBox7;
         private Button BtnCancel;
         private Button BtnSave;
     }

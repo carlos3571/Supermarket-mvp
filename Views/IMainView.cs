@@ -11,12 +11,12 @@ namespace Supermarket_mvp.Views
         event EventHandler ShowPayModeView;
         event EventHandler ShowProductView;
         event EventHandler ShowCustomerView;
-        event EventHandler ShowOrderView;
+        /*event EventHandler ShowOrderView;
         event EventHandler ShowOrderDetailView;
         event EventHandler ShowOrderDetailDetailDetailView;
         event EventHandler ShowOrderDetailsView;
         event EventHandler ShowOrderDetailsDetailDetailView;
-        event EventHandler ShowOrderDetailsDetailDetailDetailView;
+        event EventHandler ShowOrderDetailsDetailDetailDetailView;*/
 
         
     }

@@ -20,15 +20,14 @@ namespace Supermarket_mvp.Views
 
         }
         public event EventHandler ShowPayModeView;
-        public event EventHandler ShowproductView;
         public event EventHandler ShowProductView;
         public event EventHandler ShowCustomerView;
-        public event EventHandler ShowOrderView;
+        /*public event EventHandler ShowOrderView;
         public event EventHandler ShowOrderDetailView;
         public event EventHandler ShowOrderDetailDetailDetailView;
         public event EventHandler ShowOrderDetailsView;
         public event EventHandler ShowOrderDetailsDetailDetailView;
-        public event EventHandler ShowOrderDetailsDetailDetailDetailView;
+        public event EventHandler ShowOrderDetailsDetailDetailDetailView;*/
 
         private void MainView_Load(object sender, EventArgs e)
         {

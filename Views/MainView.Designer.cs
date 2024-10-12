@@ -28,20 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             panel1 = new Panel();
             BtnExit = new Button();
-            pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.Controls.Add(BtnExit);
-            panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(BtnPayMode);
             panel1.Dock = DockStyle.Left;
@@ -61,20 +59,10 @@
             BtnExit.TabIndex = 4;
             BtnExit.UseVisualStyleBackColor = true;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.BackgroundImage = Properties.Resources.buy;
-            pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Location = new Point(3, 59);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(194, 81);
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.sell;
-            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(3, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(194, 50);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -83,6 +71,8 @@
             // 
             // BtnPayMode
             // 
+            BtnPayMode.BackgroundImage = (Image)resources.GetObject("BtnPayMode.BackgroundImage");
+            BtnPayMode.BackgroundImageLayout = ImageLayout.Zoom;
             BtnPayMode.Location = new Point(3, 59);
             BtnPayMode.Name = "BtnPayMode";
             BtnPayMode.Size = new Size(194, 81);
@@ -98,10 +88,9 @@
             IsMdiContainer = true;
             Name = "MainView";
             Text = "Supermarket";
-            WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Maximized;
             Load += MainView_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -111,7 +100,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private Button BtnPayMode;
-        private PictureBox pictureBox2;
         private Button BtnExit;
     }
 }
