@@ -135,7 +135,11 @@ namespace Supermarket_mvp.Views
             set { message = value; }
         }
 
-        string IPayModeView.PayModeObdervation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string IPayModeView.PayModeObdervation 
+        {
+            get { return TxtPayModeObservation.Text; }  // Asegúrate de que el control de texto exista en tu formulario
+            set { TxtPayModeObservation.Text = value; }
+        }
 
         public string PayModeObdervation;
 
