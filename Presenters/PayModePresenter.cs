@@ -54,7 +54,7 @@ namespace Supermarket_mvp.Presenters
             var payMode = new PayModeModel();
             payMode.Id = Convert.ToInt32(view.PayModeId);
             payMode.Name = view.PayModeName;
-            payMode.Observation = view.PayModeObdervation;
+            payMode.Observation = view.PayModeObservation;
 
             try
             {
@@ -86,7 +86,7 @@ namespace Supermarket_mvp.Presenters
         {
             view.PayModeId = "0";
             view.PayModeName = "";
-            view.PayModeObdervation = "";
+            view.PayModeObservation = "";
         }
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
@@ -98,15 +98,22 @@ namespace Supermarket_mvp.Presenters
             // del datagridview
             view.PayModeId = payMode.Id.ToString();
             view.PayModeName = payMode.Name;
-            view.PayModeObdervation = payMode.Observation;
+            view.PayModeObservation = payMode.Observation;
             //SE ESTABLECE EL MODO COMO EDICION
             view.IsEdit = true;
         }
 
-        private void AddNewPayMode(object? sender, EventArgs e)
+        public void AddNewPayMode(object sender, EventArgs e)
         {
-            view.IsEdit = false;
+            // Asegúrate de que todas las propiedades existan en la vista
+            view.PayModeId = "0"; // Establece el ID en 0 para nuevos elementos.
+            view.PayModeName = string.Empty; // Limpia el campo de nombre.
+            view.PayModeObservation = string.Empty; // Limpia el campo de observación.
+
+            view.IsEdit = false; // Establece el modo de edición en falso.
         }
+
+
 
         private void SearchPayMode(object? sender, EventArgs e)
         {

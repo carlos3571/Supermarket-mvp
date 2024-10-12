@@ -24,7 +24,7 @@ namespace Supermarket_mvp.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPagePayModeDetail);
-            BtnClose.Click += delegate { this.Close(); };
+            BtnNew.Click += BtnNew_Click;
         }
 
         // métodos de la clase
@@ -44,13 +44,12 @@ namespace Supermarket_mvp.Views
             //agregar llame el evento AddNewEvent cuando se haga clic en el boton BtnNew
             BtnNew.Click += delegate
             {
-                AddNewEvent?.Invoke(this, EventArgs.Empty);
-
-                tabControl1.TabPages.Remove(tabPagePayModeList);
-                tabControl1.TabPages.Add(tabPagePayModeDetail);
-                tabPagePayModeDetail.Text = "Agregar nuevo modo de pago ";
-                //Camnia el tituloo de la pestaña
+                AddNewEvent?.Invoke(this, EventArgs.Empty); // Lanza el evento que será manejado en el Presenter.
+                tabControl1.TabPages.Remove(tabPagePayModeList); // Oculta la lista de modos de pago.
+                tabControl1.TabPages.Add(tabPagePayModeDetail); // Muestra la pestaña para agregar nuevo modo de pago.
+                tabPagePayModeDetail.Text = "Agregar nuevo modo de pago"; // Cambia el título de la pestaña.
             };
+
 
             BtnEdit.Click += delegate
             {
@@ -135,7 +134,7 @@ namespace Supermarket_mvp.Views
             set { message = value; }
         }
 
-        string IPayModeView.PayModeObdervation
+        string IPayModeView.PayModeObservation
         {
             get { return TxtPayModeObservation.Text; }  // Asegúrate de que el control de texto exista en tu formulario
             set { TxtPayModeObservation.Text = value; }
@@ -179,10 +178,21 @@ namespace Supermarket_mvp.Views
             return _instance;
         }
 
+        //private void PayModeView_Load(object sender, EventArgs e)
+        //{
+        //    tabControl1.TabPages.Add(tabPagePayModeDetail);
+        //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
+        //}
         private void PayModeView_Load(object sender, EventArgs e)
         {
-
+            // Asegúrate de que la pestaña de detalles no esté visible al cargar el formulario
+            if (tabControl1.TabPages.Contains(tabPagePayModeDetail))
+            {
+                tabControl1.TabPages.Remove(tabPagePayModeDetail);
+            }
         }
+
+
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
@@ -198,16 +208,36 @@ namespace Supermarket_mvp.Views
                 MessageBox.Show("El modo de pago será eliminado.");
             }
         }
+        //private void BtnNew_Click(object sender, EventArgs e)
+        //{
+        //    AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+        //    tabControl1.TabPages.Remove(tabPagePayModeList);
+        //    tabControl1.TabPages.Add(tabPagePayModeDetail);
+        //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
+        //}
+
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            // Aquí llamas al evento AddNewEvent que será manejado por el presenter o lógica correspondiente
+            // Llama al evento para iniciar la lógica de agregar nuevo modo de pago
             AddNewEvent?.Invoke(this, EventArgs.Empty);
 
-            // Actualizas la interfaz para reflejar que se está agregando un nuevo modo de pago
-            tabControl1.TabPages.Remove(tabPagePayModeList);
-            tabControl1.TabPages.Add(tabPagePayModeDetail);
+            // Remueve la pestaña de lista si está visible
+            if (tabControl1.TabPages.Contains(tabPagePayModeList))
+            {
+                tabControl1.TabPages.Remove(tabPagePayModeList);
+            }
+
+            // Asegúrate de que la pestaña de detalles se agrega solo una vez
+            if (!tabControl1.TabPages.Contains(tabPagePayModeDetail))
+            {
+                tabControl1.TabPages.Add(tabPagePayModeDetail);
+            }
+
+            // Cambia el título de la pestaña de detalles
             tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
         }
+
 
 
 
