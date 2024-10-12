@@ -53,7 +53,16 @@ namespace Supermarket_mvp.Presenters
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //se obtiene el objeto del datagridview que se encuentra seleccionado
+            var payMode = (PayModeModel)payModeBindingSource.Current;
+
+            //se cambia el contenido de las cajas de texto por el objeto recuperado
+            // del datagridview
+            view.PayModeId = payMode.Id.ToString();
+            view.PayModeName = payMode.Name;    
+            view.PayModeObdervation = payMode.Observation;
+            //SE ESTABLECE EL MODO COMO EDICION
+            view.IsEdit = true;
         }
 
         private void AddNewPayMode(object? sender, EventArgs e)

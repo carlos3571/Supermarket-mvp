@@ -44,41 +44,44 @@ namespace Supermarket_mvp.Views
             //agregar llame el evento AddNewEvent cuando se haga clic en el boton BtnNew
             BtnNew.Click += delegate {
                 AddNewEvent?.Invoke(this, EventArgs.Empty);
-                tabControl1.TabPages.Remove(tabPagePayModeList);
-                tabControl1.TabPages.Add(tabPagePayModeDetail);
-                tabPagePayModeDetail.Text = "Add New Pay Mode ";
+
+               tabControl1.TabPages.Remove(tabPagePayModeList);
+               tabControl1.TabPages.Add(tabPagePayModeDetail);
+               tabPagePayModeDetail.Text = "Agregar nuevo modo de pago ";
                 //Camnia el tituloo de la pestaña
             };
 
             BtnEdit.Click += delegate {
                 EditEvent?.Invoke(this, EventArgs.Empty);
+
                 tabControl1.TabPages.Remove(tabPagePayModeList);
                 tabControl1.TabPages.Add(tabPagePayModeDetail);
-                tabPagePayModeDetail.Text = "Edit Pay Mode";
+                tabPagePayModeDetail.Text = "Editar modo de pago";
                 //Camnia el tituloo de la pestaña
             };
 
             BtnDelete.Click += delegate
             {
                 var result = MessageBox.Show(
-                "Are you sure you want to delete the selected Pay Mode",
-                "Warning",
+                "Está seguro que desea eliminar el modo de pago seleccionado",
+                "Advertencia",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
+                    MessageBox.Show("En instantes se eliminara ");
                 }
             };
 
                 BtnSave.Click += delegate {
                 SaveEvent?.Invoke(this, EventArgs.Empty);
+
                 if (isSuccesful) //Si Grabar fue exitoso
                 { 
                 tabControl1.TabPages.Remove(tabPagePayModeList);
                 tabControl1.TabPages.Add(tabPagePayModeDetail);
                 }
-                MessageBox.Show(Message);
+                MessageBox.Show("Se guardara proceso");
             };
 
             BtnCancel.Click += delegate {
@@ -127,8 +130,10 @@ namespace Supermarket_mvp.Views
             set { message = value; }
         }
 
-        public string PayModeObdervation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        //public bool IsSuccessful { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string IPayModeView.PayModeObdervation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public string PayModeObdervation; 
+        
 
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
