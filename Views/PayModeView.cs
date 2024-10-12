@@ -135,14 +135,15 @@ namespace Supermarket_mvp.Views
             set { message = value; }
         }
 
-        string IPayModeView.PayModeObdervation 
+        string IPayModeView.PayModeObdervation
         {
             get { return TxtPayModeObservation.Text; }  // Asegúrate de que el control de texto exista en tu formulario
             set { TxtPayModeObservation.Text = value; }
         }
 
-        public string PayModeObdervation;
+        public int DeleteSelectedEvent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+ 
 
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
@@ -183,15 +184,33 @@ namespace Supermarket_mvp.Views
 
         }
 
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "¿Está seguro que desea eliminar el modo de pago seleccionado?",
+                "Advertencia",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Aquí llamas al evento de eliminación que será manejado por el presenter o lógica
+                DeleteEvent?.Invoke(this, EventArgs.Empty);
+                MessageBox.Show("El modo de pago será eliminado.");
+            }
+        }
         private void BtnNew_Click(object sender, EventArgs e)
         {
+            // Aquí llamas al evento AddNewEvent que será manejado por el presenter o lógica correspondiente
             AddNewEvent?.Invoke(this, EventArgs.Empty);
 
+            // Actualizas la interfaz para reflejar que se está agregando un nuevo modo de pago
             tabControl1.TabPages.Remove(tabPagePayModeList);
             tabControl1.TabPages.Add(tabPagePayModeDetail);
-            tabPagePayModeDetail.Text = "Agregar nuevo modo de pago ";
-            //Camnia el tituloo de la pestaña
-
+            tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
         }
+
+
+
+
     }
 }

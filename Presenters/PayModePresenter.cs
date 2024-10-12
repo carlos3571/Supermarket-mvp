@@ -29,6 +29,7 @@ namespace Supermarket_mvp.Presenters
             this.view.SaveEvent += SavePayMode;
             this.view.CancelEvent += CancelAction;
 
+
             this.view.SetPayModeListBildingSource(payModeBindingSource);
 
             LoadAllPayModeList();
@@ -96,7 +97,7 @@ namespace Supermarket_mvp.Presenters
             //se cambia el contenido de las cajas de texto por el objeto recuperado
             // del datagridview
             view.PayModeId = payMode.Id.ToString();
-            view.PayModeName = payMode.Name;    
+            view.PayModeName = payMode.Name;
             view.PayModeObdervation = payMode.Observation;
             //SE ESTABLECE EL MODO COMO EDICION
             view.IsEdit = true;
@@ -121,5 +122,28 @@ namespace Supermarket_mvp.Presenters
 
             payModeBindingSource.DataSource = payModeList;
         }
+
+        private void DelectedSelectedPayMode(object? sender, EventArgs e)
+        {
+            try
+            {
+                //se recupera el objeto de la fila seleccionada del dataviewgrid
+                var payMode = (PayModeModel)payModeBindingSource.Current;
+
+                //se invoca el metodo Delete del repositorio pasando el ID del pay mode
+                repository.Delete(payMode.Id);
+                view.IsSuccessful = true;
+                view.Message = "modo de pago eliminado exitosamente";
+                LoadAllPayModeList();
+            }
+            catch (Exception ex) 
+            {
+                view.IsSuccessful = false;
+                view.Message = "ocurrió un error, no se pudo eliminar el modo de pago";
+            }
+            
+            
+        }
     }
 }
+

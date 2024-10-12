@@ -1,4 +1,5 @@
-﻿namespace Supermarket_mvp.Views
+﻿
+namespace Supermarket_mvp.Views
 {
     partial class PayModeView
     {
@@ -141,6 +142,7 @@
             BtnDelete.Size = new Size(91, 46);
             BtnDelete.TabIndex = 7;
             BtnDelete.UseVisualStyleBackColor = false;
+            BtnDelete.Click += BtnDelete_Click;
             // 
             // BtnEdit
             // 
@@ -292,8 +294,11 @@
             // 
             TxtPayModeId.Location = new Point(19, 32);
             TxtPayModeId.Name = "TxtPayModeId";
+            TxtPayModeId.ReadOnly = true;
             TxtPayModeId.Size = new Size(167, 23);
             TxtPayModeId.TabIndex = 1;
+            TxtPayModeId.Text = "0";
+            TxtPayModeId.TextAlign = HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -326,6 +331,8 @@
             tabPagePayModeDetail.PerformLayout();
             ResumeLayout(false);
         }
+
+        
 
         #endregion
 
