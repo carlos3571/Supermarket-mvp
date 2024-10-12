@@ -87,17 +87,43 @@ namespace Supermarket_mvp.Views
                 }
             };
 
+            //BtnSave.Click += delegate
+            //{
+            //    SaveEvent?.Invoke(this, EventArgs.Empty);
+
+            //    if (isSuccesful) //Si Grabar fue exitoso
+            //    {
+            //        tabControl1.TabPages.Remove(tabPagePayModeList);
+            //        tabControl1.TabPages.Add(tabPagePayModeDetail);
+            //    }
+            //    MessageBox.Show("Se guardara proceso");
+            //};
+
             BtnSave.Click += delegate
             {
-                SaveEvent?.Invoke(this, EventArgs.Empty);
-
-                if (isSuccesful) //Si Grabar fue exitoso
+                // Verifica si los campos están llenos antes de intentar guardar
+                if (string.IsNullOrWhiteSpace(TxtPayModeName.Text) || string.IsNullOrWhiteSpace(TxtPayModeObservation.Text))
                 {
-                    tabControl1.TabPages.Remove(tabPagePayModeList);
-                    tabControl1.TabPages.Add(tabPagePayModeDetail);
+                    MessageBox.Show("Por favor completa todos los campos antes de guardar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Detiene el proceso de guardado si los campos están vacíos
                 }
-                MessageBox.Show("Se guardara proceso");
+
+                SaveEvent?.Invoke(this, EventArgs.Empty);  // Llama el evento de guardar
+
+                // Verifica si el guardado fue exitoso
+                if (IsSuccessful)
+                {
+                    tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                    tabControl1.TabPages.Add(tabPagePayModeList);
+                    MessageBox.Show("Modo de pago guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             };
+
+
 
             BtnCancel.Click += delegate
             {

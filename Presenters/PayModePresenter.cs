@@ -47,17 +47,19 @@ namespace Supermarket_mvp.Presenters
             CleanViewFields();
         }
 
+        
         private void SavePayMode(object? sender, EventArgs e)
         {
             var payMode = new PayModeModel();
             payMode.Id = Convert.ToInt32(view.PayModeId);
-            payMode.Name = view.PayModeName;  // Asegúrate de que no sea nulo o vacío
-            payMode.Observation = view.PayModeObservation;  // Asegúrate de que no sea nulo o vacío
-
+            payMode.Name = view.PayModeName;
+            payMode.Observation = view.PayModeObservation;
 
             try
             {
+                // Validación antes de guardar
                 new Common.ModelDataValidation().Validate(payMode);
+
                 if (view.IsEdit)
                 {
                     repository.Edit(payMode);
@@ -74,12 +76,11 @@ namespace Supermarket_mvp.Presenters
             }
             catch (Exception ex)
             {
-                //si ocurre una excepcion se configura isSuccesfull en false
-                //y a la propiedad message de la vista se asigna el mensaje de la exception
                 view.IsSuccessful = false;
                 view.Message = ex.Message;
             }
         }
+
 
         private void CleanViewFields()
         {
