@@ -87,17 +87,7 @@ namespace Supermarket_mvp.Views
                 }
             };
 
-            //BtnSave.Click += delegate
-            //{
-            //    SaveEvent?.Invoke(this, EventArgs.Empty);
-
-            //    if (isSuccesful) //Si Grabar fue exitoso
-            //    {
-            //        tabControl1.TabPages.Remove(tabPagePayModeList);
-            //        tabControl1.TabPages.Add(tabPagePayModeDetail);
-            //    }
-            //    MessageBox.Show("Se guardara proceso");
-            //};
+           
 
             BtnSave.Click += delegate
             {
@@ -149,26 +139,7 @@ namespace Supermarket_mvp.Views
             //};
 
 
-            BtnSave.Click += delegate
-            {
-                SaveEvent?.Invoke(this, EventArgs.Empty);  // Invoca el evento de guardado
-
-                // Verifica si la operación fue exitosa
-                if (IsSuccessful)  // O bien: if (view.IsSuccessful)
-                {
-                    // Guardado exitoso, volver a la lista de modos de pago
-                    tabControl1.TabPages.Remove(tabPagePayModeDetail);
-                    tabControl1.TabPages.Add(tabPagePayModeList);
-
-                    // Mensaje de confirmación para el usuario
-                    MessageBox.Show("Modo de pago guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    // Guardado fallido, mostrar mensaje de error
-                    MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            };
+            
 
 
 
