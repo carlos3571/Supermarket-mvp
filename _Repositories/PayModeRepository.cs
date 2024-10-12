@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.Data.SqlClient;
-using Microsoft.Data;
 using Supermarket_mvp.Models;
 using System.Data;
+using System.Data.SqlClient;
 
 
 namespace Supermarket_mvp._Repositories
@@ -18,10 +17,38 @@ namespace Supermarket_mvp._Repositories
         {
             this.connectionString = connectionstring;
         }
+        //public void Add(PayModeModel payModeModel)
+        //{
+        //    using(var connection = new SqlConnection(connectionString)) 
+        //    using(var command = new SqlConnection())
+        //    {
+        //        connection.Open();
+        //        command.Connection = connection;
+        //        command.commandText = "insertar en los valores del modo de pago (@nombre, @observación)";
+        //        command.Parameters.Add("@name", sqlDbType.NVarChar).Value = payModeModel.Name;
+        //        command.Parameters.Add("@observation", SqlDbType.NVarChar).value = payModeModel.Observation;
+        //        command.ExecuteNonQuery();
+
+        //    }
+
+        //}
+
         public void Add(PayModeModel payModeModel)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "INSERT INTO PayMode (Name, Observation) VALUES (@name, @observation)";
+                    command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeModel.Name;
+                    command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = payModeModel.Observation;
+                    command.ExecuteNonQuery();
+                }
+            }
         }
+
 
         public void Delete(int id)
         {

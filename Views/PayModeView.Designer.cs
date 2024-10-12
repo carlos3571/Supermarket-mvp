@@ -165,6 +165,7 @@
             BtnNew.Size = new Size(91, 47);
             BtnNew.TabIndex = 5;
             BtnNew.UseVisualStyleBackColor = false;
+            BtnNew.Click += BtnNew_Click;
             // 
             // DgPayMode
             // 

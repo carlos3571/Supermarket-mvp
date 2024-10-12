@@ -42,16 +42,18 @@ namespace Supermarket_mvp.Views
                     }
                 };
             //agregar llame el evento AddNewEvent cuando se haga clic en el boton BtnNew
-            BtnNew.Click += delegate {
+            BtnNew.Click += delegate
+            {
                 AddNewEvent?.Invoke(this, EventArgs.Empty);
 
-               tabControl1.TabPages.Remove(tabPagePayModeList);
-               tabControl1.TabPages.Add(tabPagePayModeDetail);
-               tabPagePayModeDetail.Text = "Agregar nuevo modo de pago ";
+                tabControl1.TabPages.Remove(tabPagePayModeList);
+                tabControl1.TabPages.Add(tabPagePayModeDetail);
+                tabPagePayModeDetail.Text = "Agregar nuevo modo de pago ";
                 //Camnia el tituloo de la pestaña
             };
 
-            BtnEdit.Click += delegate {
+            BtnEdit.Click += delegate
+            {
                 EditEvent?.Invoke(this, EventArgs.Empty);
 
                 tabControl1.TabPages.Remove(tabPagePayModeList);
@@ -73,18 +75,20 @@ namespace Supermarket_mvp.Views
                 }
             };
 
-                BtnSave.Click += delegate {
+            BtnSave.Click += delegate
+            {
                 SaveEvent?.Invoke(this, EventArgs.Empty);
 
                 if (isSuccesful) //Si Grabar fue exitoso
-                { 
-                tabControl1.TabPages.Remove(tabPagePayModeList);
-                tabControl1.TabPages.Add(tabPagePayModeDetail);
+                {
+                    tabControl1.TabPages.Remove(tabPagePayModeList);
+                    tabControl1.TabPages.Add(tabPagePayModeDetail);
                 }
                 MessageBox.Show("Se guardara proceso");
             };
 
-            BtnCancel.Click += delegate {
+            BtnCancel.Click += delegate
+            {
                 CancelEvent?.Invoke(this, EventArgs.Empty);
 
                 tabControl1.TabPages.Remove(tabPagePayModeDetail);
@@ -116,8 +120,9 @@ namespace Supermarket_mvp.Views
         public bool IsEdit
         {
             get { return isEdit; }
-            set { IsEdit = value; }
+            set { isEdit = value; }  // Asignas el valor directamente a la variable privada
         }
+
 
         public bool IsSuccessful
         {
@@ -132,8 +137,8 @@ namespace Supermarket_mvp.Views
 
         string IPayModeView.PayModeObdervation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public string PayModeObdervation; 
-        
+        public string PayModeObdervation;
+
 
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
@@ -171,6 +176,17 @@ namespace Supermarket_mvp.Views
 
         private void PayModeView_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+            tabControl1.TabPages.Remove(tabPagePayModeList);
+            tabControl1.TabPages.Add(tabPagePayModeDetail);
+            tabPagePayModeDetail.Text = "Agregar nuevo modo de pago ";
+            //Camnia el tituloo de la pestaña
 
         }
     }

@@ -43,12 +43,49 @@ namespace Supermarket_mvp.Presenters
 
         private void CancelAction(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CleanViewFields();
         }
 
         private void SavePayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //se crea un objeto de la clase PayModeModel y se asigna los datos
+            //de las cajas de texto de la vista
+            var payMode = new PayModeModel();
+            payMode.Id = Convert.ToInt32(view.PayModeId);
+            payMode.Name = view.PayModeName;
+            payMode.Observation = view.PayModeObdervation;
+
+            try
+            {
+                new Common.ModelDataValidation().Validate(payMode);
+                if (view.IsEdit)
+                {
+                    repository.Edit(payMode);
+                    view.Message = "Modo de pago editado exitosamente";
+                }
+                else
+                {
+                    repository.Add(payMode);
+                    view.Message = "Modo de pago agregado exitosamente";
+                }
+                view.IsSuccessful = true;
+                LoadAllPayModeList();
+                CleanViewFields();
+            }
+            catch (Exception ex)
+            {
+                //si ocurre una excepcion se configura isSuccesfull en false
+                //y a la propiedad message de la vista se asigna el mensaje de la exception
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
+        }
+
+        private void CleanViewFields()
+        {
+            view.PayModeId = "0";
+            view.PayModeName = "";
+            view.PayModeObdervation = "";
         }
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
