@@ -43,7 +43,7 @@ namespace Supermarket_mvp._Repositories
                     connection.Open();
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
-                    command.CommandText = "DELETE FROM Categories where Pay_mode_Id = @id";
+                    command.CommandText = "DELETE FROM Categories where CategoryId = @id";
                     command.Parameters.Add("@id", SqlDbType.Int).Value = id;
                     command.ExecuteNonQuery();
 
@@ -60,12 +60,12 @@ namespace Supermarket_mvp._Repositories
                     connection.Open();
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
-                    command.CommandText = @"UPDATE PayMode
-                                       SET Pay_Mode_Name =@name,
-                                       Pay_Mode_Observation = @observation
-                                       WHERE Pay_Mode_Id =@id";
-                    command.Parameters.Add("@name", SqlDbType.NVarChar).Value = categoriesModel.Name;
-                    command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = categoriesModel.Description;
+                    command.CommandText = @"UPDATE Categories
+                                       SET Name =@Name,
+                                       Description = @Description
+                                       WHERE CategoryId =@id";
+                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = categoriesModel.Name;
+                    command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = categoriesModel.Description;
                     command.Parameters.Add("@id", SqlDbType.Int).Value = categoriesModel.CategoryId;
                     command.ExecuteNonQuery();
                 }
@@ -104,6 +104,7 @@ namespace Supermarket_mvp._Repositories
             var categoriesList = new List<Categories>();
             int categoryId = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
             string Name = value;
+            string Description = value;
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand())
             {
@@ -114,6 +115,7 @@ namespace Supermarket_mvp._Repositories
                                         ORDER BY CategoryId DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = categoryId;
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = Name;
+                command.Parameters.Add("@Description", SqlDbType.NVarChar).Value= Description;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
