@@ -8,10 +8,10 @@ namespace Supermarket_mvp.Views
 {
     internal interface IProvidersView
     {
-        string ProviderId { get; set; }
+        int ProviderId { get; set; }
         string Name { get; set; }
         string Address { get; set; }
-        int PhoneNumber { get; set; }
+        string PhoneNumber { get; set; }
         string Email { get; set; }
 
         string SearchValue { get; set; }
@@ -26,7 +26,7 @@ namespace Supermarket_mvp.Views
         event EventHandler SaveEvent;
         event EventHandler CancelEvent;
 
-        void SetPayModeListBildingSource(BindingSource payModeList);
+        void SetProvidersListBildingSource(BindingSource payModeList);
         void Show();
     }
 }
