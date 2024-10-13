@@ -20,6 +20,7 @@ namespace Supermarket_mvp.Views
         public CategoryView()
         {
             InitializeComponent();
+           
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabSingleViewCategory);

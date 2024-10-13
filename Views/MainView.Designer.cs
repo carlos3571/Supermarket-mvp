@@ -30,16 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             panel1 = new Panel();
+            Productos = new Button();
+            Categoria = new Button();
             BtnExit = new Button();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
-            Categoria = new Button();
+            Proveedores = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(Proveedores);
+            panel1.Controls.Add(Productos);
             panel1.Controls.Add(Categoria);
             panel1.Controls.Add(BtnExit);
             panel1.Controls.Add(pictureBox1);
@@ -49,6 +53,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 450);
             panel1.TabIndex = 0;
+            // 
+            // Productos
+            // 
+            Productos.BackgroundImage = (Image)resources.GetObject("Productos.BackgroundImage");
+            Productos.BackgroundImageLayout = ImageLayout.Zoom;
+            Productos.Location = new Point(0, 218);
+            Productos.Name = "Productos";
+            Productos.Size = new Size(197, 75);
+            Productos.TabIndex = 6;
+            Productos.UseVisualStyleBackColor = true;
+            // 
+            // Categoria
+            // 
+            Categoria.BackgroundImage = (Image)resources.GetObject("Categoria.BackgroundImage");
+            Categoria.BackgroundImageLayout = ImageLayout.Zoom;
+            Categoria.Location = new Point(3, 146);
+            Categoria.Name = "Categoria";
+            Categoria.Size = new Size(194, 66);
+            Categoria.TabIndex = 5;
+            Categoria.UseVisualStyleBackColor = true;
             // 
             // BtnExit
             // 
@@ -82,15 +106,15 @@
             BtnPayMode.UseVisualStyleBackColor = true;
             BtnPayMode.Click += BtnPayMode_Click;
             // 
-            // Categoria
+            // Proveedores
             // 
-            Categoria.BackgroundImage = (Image)resources.GetObject("Categoria.BackgroundImage");
-            Categoria.BackgroundImageLayout = ImageLayout.Zoom;
-            Categoria.Location = new Point(3, 146);
-            Categoria.Name = "Categoria";
-            Categoria.Size = new Size(194, 66);
-            Categoria.TabIndex = 5;
-            Categoria.UseVisualStyleBackColor = true;
+            Proveedores.BackgroundImage = (Image)resources.GetObject("Proveedores.BackgroundImage");
+            Proveedores.BackgroundImageLayout = ImageLayout.Zoom;
+            Proveedores.Location = new Point(3, 299);
+            Proveedores.Name = "Proveedores";
+            Proveedores.Size = new Size(194, 77);
+            Proveedores.TabIndex = 7;
+            Proveedores.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
@@ -115,5 +139,7 @@
         private Button BtnPayMode;
         private Button BtnExit;
         private Button Categoria;
+        private Button Productos;
+        private Button Proveedores;
     }
 }

@@ -131,6 +131,8 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = SystemColors.Info;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(22, 100);
             dataGridView1.Name = "dataGridView1";
@@ -154,7 +156,7 @@
             textCategoryId.BackColor = SystemColors.InactiveCaption;
             textCategoryId.Location = new Point(22, 48);
             textCategoryId.Name = "textCategoryId";
-            textCategoryId.PlaceholderText = "CategoryId";
+            textCategoryId.PlaceholderText = "Data to search";
             textCategoryId.Size = new Size(302, 23);
             textCategoryId.TabIndex = 1;
             // 
@@ -164,7 +166,7 @@
             label1.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(22, 25);
             label1.Name = "label1";
-            label1.Size = new Size(112, 20);
+            label1.Size = new Size(139, 20);
             label1.TabIndex = 0;
             label1.Text = "CategoryIdlbl";
             // 
@@ -195,7 +197,6 @@
             CancelarC.Size = new Size(108, 94);
             CancelarC.TabIndex = 7;
             CancelarC.UseVisualStyleBackColor = true;
-            //CancelarC.Click += CancelarC_Click;
             // 
             // GuardarC
             // 
@@ -212,7 +213,7 @@
             // 
             txtDescription.BackColor = SystemColors.InactiveCaption;
             txtDescription.Location = new Point(17, 295);
-            txtDescription.Name = "Description";
+            txtDescription.Name = "txtDescription";
             txtDescription.PlaceholderText = "Description";
             txtDescription.Size = new Size(361, 23);
             txtDescription.TabIndex = 5;
@@ -242,15 +243,15 @@
             label3.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(18, 141);
             label3.Name = "label3";
-            label3.Size = new Size(54, 20);
+            label3.Size = new Size(171, 20);
             label3.TabIndex = 2;
             label3.Text = "txtCategoryName";
             // 
-            // CategoryIdTextbox
+            // txtCategoryId
             // 
             txtCategoryId.BackColor = SystemColors.InactiveCaption;
             txtCategoryId.Location = new Point(18, 73);
-            txtCategoryId.Name = "CategoryId";
+            txtCategoryId.Name = "txtCategoryId";
             txtCategoryId.PlaceholderText = "CategoryId";
             txtCategoryId.Size = new Size(360, 23);
             txtCategoryId.TabIndex = 1;
@@ -271,7 +272,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(tabControl1);
-            //txtCategoryName = "CategoryView";
+            Name = "CategoryView";
             Text = "CategoryView";
             tabControl1.ResumeLayout(false);
             tabListViewCategory.ResumeLayout(false);

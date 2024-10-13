@@ -21,6 +21,9 @@ namespace Supermarket_mvp.Views
         public PayModeView()
         {
             InitializeComponent();
+           
+            BtnClose.Click += delegate { this.Close(); };
+
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPagePayModeDetail);
@@ -114,24 +117,6 @@ namespace Supermarket_mvp.Views
                 tabControl1.TabPages.Add(tabPagePayModeList);
             };
 
-            //BtnSave.Click += delegate
-            //{
-            //    SaveEvent?.Invoke(this, EventArgs.Empty);
-
-            //    if (isSuccesful)
-            //    {
-            //        // Guardar exitoso, volver a la lista
-            //        tabControl1.TabPages.Remove(tabPagePayModeDetail);
-            //        tabControl1.TabPages.Add(tabPagePayModeList);
-            //    }
-            //};
-
-
-            
-
-
-
-
         }
         public string PayModeId
         {
@@ -216,16 +201,6 @@ namespace Supermarket_mvp.Views
             return _instance;
         }
 
-        //private void PayModeView_Load(object sender, EventArgs e)
-        //{
-        //    tabControl1.TabPages.Add(tabPagePayModeDetail);
-        //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
-        //}
-        //private void PayModeView_Load(object sender, EventArgs e)
-        //{
-        //   // tabControl1.TabPages.Add(tabPagePayModeDetail);
-        //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
-        //}
         private void PayModeView_Load(object sender, EventArgs e)
         {
             // Si estamos en modo de edición, se cargará la pestaña de edición
