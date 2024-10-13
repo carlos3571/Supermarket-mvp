@@ -74,18 +74,18 @@ namespace Supermarket_mvp.Views
                 //Camnia el tituloo de la pestaña
             };
 
-            BtnDelete.Click += delegate
-            {
-                var result = MessageBox.Show(
-                "Está seguro que desea eliminar el modo de pago seleccionado",
-                "Advertencia",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show("En instantes se eliminara ");
-                }
-            };
+            //BtnDelete.Click += delegate
+            //{
+            //    var result = MessageBox.Show(
+            //    "Está seguro que desea eliminar el modo de pago seleccionado",
+            //    "Advertencia",
+            //    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        DeleteEvent?.Invoke(this, EventArgs.Empty);
+            //        MessageBox.Show("En instantes se eliminara ");
+            //    }
+            //};
 
            
 
@@ -262,11 +262,6 @@ namespace Supermarket_mvp.Views
 
             
         }
-
-
-
-
-
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(
@@ -281,14 +276,7 @@ namespace Supermarket_mvp.Views
                 MessageBox.Show("El modo de pago será eliminado.");
             }
         }
-        //private void BtnNew_Click(object sender, EventArgs e)
-        //{
-        //    AddNewEvent?.Invoke(this, EventArgs.Empty);
-
-        //    tabControl1.TabPages.Remove(tabPagePayModeList);
-        //    tabControl1.TabPages.Add(tabPagePayModeDetail);
-        //    tabPagePayModeDetail.Text = "Agregar nuevo modo de pago";
-        //}
+    
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
