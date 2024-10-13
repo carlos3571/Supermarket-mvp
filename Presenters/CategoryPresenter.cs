@@ -1,4 +1,5 @@
-﻿using Supermarket_mvp.Models;
+﻿using Supermarket_mvp._Repositories;
+using Supermarket_mvp.Models;
 using Supermarket_mvp.Views;
 using System;
 using System.Collections.Generic;
@@ -6,37 +7,38 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Supermarket_mvp.Presenters
 {
     internal class CategoryPresenter
     {
-        private ICategoriaView view;
-        private ICategoriesRepository repository;
+        private ICategoriaView iCategoryView;
+        private ICategoriesRepository iCategoryRepository;
         private BindingSource categoryBindingSource;
         private IEnumerable<Categories> categoryList;
         public CategoryPresenter(ICategoriaView view, ICategoriesRepository repository)
         {
             this.categoryBindingSource = new BindingSource();
-            this.view = view;
-            this.repository = repository;
+            this.iCategoryView = view;
+            this.iCategoryRepository = repository;
 
 
-            this.view.AddNewEvent += AddNewPayMode;
-            this.view.SaveEvent += SavePayMode;
-            this.view.EditEvent += LoadSelectPayModeToEdit;
-            this.view.DeleteEvent += EliminarSelectedCategories;
-            this.view.SearchEvent += Buscar;
-            this.view.CancelEvent += CancelAction;
+            this.iCategoryView.AddNewEvent += AddNewPayMode;
+            this.iCategoryView.SaveEvent += SaveCategory;
+            this.iCategoryView.EditEvent += LoadSelectCategoryToEdit;
+            this.iCategoryView.DeleteEvent += EliminarSelectedCategories;
+            this.iCategoryView.SearchEvent += Buscar;
+            this.iCategoryView.CancelEvent += CancelAction;
 
-            this.view.SetCategoryListBildingSource(categoryBindingSource);
+            this.iCategoryView.SetCategoryListBildingSource(categoryBindingSource);
 
             LoadAllcategoryList();
-            this.view.Show();
+            this.iCategoryView.Show();
         }
         private void LoadAllcategoryList()
         {
-            categoryList = repository.GetAll();
+            categoryList = iCategoryRepository.GetAll();
             categoryBindingSource.DataSource = categoryList;
         }
 
@@ -45,93 +47,84 @@ namespace Supermarket_mvp.Presenters
             CleanViewFields();
         }
 
-        private void SavePayMode(object? sender, EventArgs e)
+        private void SaveCategory(object sender, EventArgs e)
         {
             var categories = new Categories
             {
-                CategoryId = Convert.ToInt32(view.CategoryId),
-                Name = view.Name,
-                Description = view.Description
+                CategoryId = iCategoryView.CategoryId,
+                Name = iCategoryView.Name,
+                Description = iCategoryView.Description
             };
 
             try
             {
-                // Validación antes de guardar
-                new Common.ModelDataValidation().Validate(categories);
-
-                if (view.IsEdit)
+                if (iCategoryView.IsEdit)
                 {
-                    repository.Edit(categories);
-                    view.Message = "Categoria editada exitosamente";
+                    iCategoryRepository.Edit(categories);  // Se llama al método Edit del repositorio
+                    iCategoryView.Message = "Categoría editada exitosamente.";
                 }
                 else
                 {
-                    repository.Add(categories);
-                    view.Message = "Categoria  agregada exitosamente";
+                    iCategoryRepository.Add(categories);
+                    iCategoryView.Message = "Categoría agregada exitosamente.";
                 }
 
-                view.IsSuccessful = true;
-                LoadAllcategoryList();
+                iCategoryView.IsSuccessful = true;
+                LoadAllcategoryList();  // Refrescar la lista después de guardar
                 CleanViewFields();
-            }
-            catch (ValidationException ex)
-            {
-                view.IsSuccessful = false;
-                view.Message = $"Error de validación: {ex.Message}";
             }
             catch (Exception ex)
             {
-                view.IsSuccessful = false;
-                view.Message = $"Error inesperado: {ex.Message}";
+                iCategoryView.IsSuccessful = false;
+                iCategoryView.Message = $"Error inesperado: {ex.Message}";
             }
         }
 
+
+
         private void CleanViewFields()
         {
-            view.CategoryId = 0;
-            view.Name = string.Empty;
-            view.Description = string.Empty;
+            iCategoryView.CategoryId = 0;
+            iCategoryView.Name = string.Empty;
+            iCategoryView.Description = string.Empty;
         }
 
-        private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
+        private void LoadSelectCategoryToEdit(object? sender, EventArgs e)
         {
-            // Se verifica que el objeto seleccionado no sea nulo.
             if (categoryBindingSource.Current == null)
             {
-                view.Message = "No se ha seleccionado ningún modo de pago para editar.";
+                iCategoryView.Message = "No se ha seleccionado ningún modo de pago para editar.";
                 return;
             }
 
             var categories = (Categories)categoryBindingSource.Current;
-
-            // Asignar valores a los campos
-            view.CategoryId = categories.CategoryId;
-            view.Name = categories.Name ?? string.Empty;
-            view.Description = categories.Description ?? string.Empty;
-
-            view.IsEdit = true;
+            iCategoryView.CategoryId = categories.CategoryId;
+            iCategoryView.Name = categories.Name ?? string.Empty;
+            iCategoryView.Description = categories.Description ?? string.Empty;
+            iCategoryView.IsEdit = true;
         }
+
 
         public void AddNewPayMode(object sender, EventArgs e)
         {
             // Asegúrate de que todas las propiedades existan en la vista
-            view.CategoryId = 0; // Establece el ID en 0 para nuevos elementos.
-            view.Name = string.Empty; // Limpia el campo de nombre.
-            view.Description = string.Empty; // Limpia el campo de observación.
+            iCategoryView.CategoryId = 0; // Establece el ID en 0 para nuevos elementos.
+            iCategoryView.Name = string.Empty; // Limpia el campo de nombre.
+            iCategoryView.Description = string.Empty; // Limpia el campo de observación.
 
-            view.IsEdit = false; // Establece el modo de edición en falso.
+            iCategoryView.IsEdit = false; // Establece el modo de edición en falso.
         }
 
         private void Buscar(object? sender, EventArgs e)
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(this.view.SearchValue);
+            bool emptyValue = string.IsNullOrWhiteSpace(this.iCategoryView.SearchValue);
             if (emptyValue == false)
             {
-                categoryList = repository.GetByValue(this.view.SearchValue);
+                categoryList = iCategoryRepository.GetByValue(this.iCategoryView.SearchValue);
             }
             else
             {
-                categoryList = repository.GetAll();
+                categoryList = iCategoryRepository.GetAll();
             }
 
             categoryBindingSource.DataSource = categoryList;
@@ -141,8 +134,8 @@ namespace Supermarket_mvp.Presenters
         {
             if (categoryBindingSource.Current == null)
             {
-                view.Message = "No hay un modo de pago seleccionado para eliminar.";
-                view.IsSuccessful = false;
+                iCategoryView.Message = "No hay un modo de pago seleccionado para eliminar.";
+                iCategoryView.IsSuccessful = false;
                 return;
             }
 
@@ -152,15 +145,15 @@ namespace Supermarket_mvp.Presenters
                 var categories = (Categories)categoryBindingSource.Current;
 
                 // Se invoca el método Delete del repositorio pasando el ID del pay mode
-                repository.Delete(categories.CategoryId);
-                view.IsSuccessful = true;
-                view.Message = "Modo de pago eliminado exitosamente";
+                iCategoryRepository.Delete(categories.CategoryId);
+                iCategoryView.IsSuccessful = true;
+                iCategoryView.Message = "Modo de pago eliminado exitosamente";
                 LoadAllcategoryList();
             }
             catch (Exception ex)
             {
-                view.IsSuccessful = false;
-                view.Message = $"Ocurrió un error: {ex.Message}";
+                iCategoryView.IsSuccessful = false;
+                iCategoryView.Message = $"Ocurrió un error: {ex.Message}";
             }
         }
     }

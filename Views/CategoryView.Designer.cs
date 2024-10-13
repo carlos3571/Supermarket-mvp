@@ -114,7 +114,7 @@
             EditarC.Size = new Size(75, 62);
             EditarC.TabIndex = 5;
             EditarC.UseVisualStyleBackColor = true;
-            EditarC.Click += EditarC_Click;
+            //EditarC.Click += EditarC_Click;
             // 
             // NuevoC
             // 
@@ -233,7 +233,7 @@
             txtCategoryName.BackColor = SystemColors.InactiveCaption;
             txtCategoryName.Location = new Point(18, 174);
             txtCategoryName.Name = "txtCategoryName";
-            txtCategoryName.PlaceholderText = "txtCategoryName";
+            txtCategoryName.PlaceholderText = "CategoryName";
             txtCategoryName.Size = new Size(360, 23);
             txtCategoryName.TabIndex = 3;
             // 
@@ -245,7 +245,7 @@
             label3.Name = "label3";
             label3.Size = new Size(171, 20);
             label3.TabIndex = 2;
-            label3.Text = "txtCategoryName";
+            label3.Text = "CategoryName";
             // 
             // txtCategoryId
             // 
@@ -253,8 +253,11 @@
             txtCategoryId.Location = new Point(18, 73);
             txtCategoryId.Name = "txtCategoryId";
             txtCategoryId.PlaceholderText = "CategoryId";
+            txtCategoryId.ReadOnly = true;
             txtCategoryId.Size = new Size(360, 23);
             txtCategoryId.TabIndex = 1;
+            txtCategoryId.Text = "0";
+            txtCategoryId.TextAlign = HorizontalAlignment.Right;
             // 
             // label2
             // 

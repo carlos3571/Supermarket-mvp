@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Supermarket_mvp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -64,27 +66,27 @@ namespace Supermarket_mvp.Views
 
 
 
-
             EditarC.Click += delegate
             {
-                EditEvent?.Invoke(this, EventArgs.Empty);
+                EditEvent?.Invoke(this, EventArgs.Empty); // Esto debería invocar el método en el presenter.
 
                 tabControl1.TabPages.Remove(tabListViewCategory);
                 tabControl1.TabPages.Add(tabSingleViewCategory);
-                tabListViewCategory.Text = "Editar modo de pago";
-                //Camnia el tituloo de la pestaña
-            };
+                tabSingleViewCategory.Text = "Editar categoría";
 
+                IsEdit = true; // Aquí debe establecerse en true.
+            };
 
 
 
             GuardarC.Click += delegate
             {
-                // Verifica si los campos están vacíos antes de intentar guardar
-                if (string.IsNullOrWhiteSpace(txtCategoryName.Text) || string.IsNullOrWhiteSpace(txtDescription.Text))
+              
+
+                if (string.IsNullOrWhiteSpace(txtCategoryName.Text.Trim()) || string.IsNullOrWhiteSpace(txtDescription.Text.Trim()))
                 {
-                    MessageBox.Show("Pay Mode txtCategoryName and Pay Mode Observation are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Detener el proceso de guardado
+                    MessageBox.Show("Categoria are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
                 }
 
                 // Invoca el evento de guardado
@@ -96,7 +98,7 @@ namespace Supermarket_mvp.Views
                     // Guardado exitoso, volver a la lista de modos de pago
                     tabControl1.TabPages.Remove(tabSingleViewCategory);
                     tabControl1.TabPages.Add(tabListViewCategory);
-                    MessageBox.Show("Pay Mode saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Categoria successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -151,11 +153,38 @@ namespace Supermarket_mvp.Views
             }
             return _instance;
         }
+
+        private void CategoryView_Load(object sender, EventArgs e)
+        {
+            // Si estamos en modo de edición, se cargará la pestaña de edición
+            if (isEdit)
+            {
+                if (!tabControl1.TabPages.Contains(tabSingleViewCategory))
+                {
+                    tabControl1.TabPages.Add(tabSingleViewCategory);
+                }
+
+                tabSingleViewCategory.Text = "Editar Categoria";
+            }
+            else
+            {
+                if (!tabControl1.TabPages.Contains(tabSingleViewCategory))
+                {
+                    tabControl1.TabPages.Add(tabSingleViewCategory);
+                }
+
+                tabSingleViewCategory.Text = "Agregar nueva categoria";
+            }
+
+
+        }
         public int CategoryId
         {
             get { return int.TryParse(textCategoryId.Text, out int id) ? id : 0; }
             set { textCategoryId.Text = value.ToString(); }
         }
+
+      
         //string ICategoriaView.Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Description
         {
@@ -185,6 +214,13 @@ namespace Supermarket_mvp.Views
             get { return message; }
             set { message = value; }
         }
+
+        string ICategoriaView.Name 
+        {
+            get { return txtCategoryName.Text; }
+            set { txtCategoryName.Text = value; }
+        }
+
         //public string Message { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 
@@ -216,25 +252,7 @@ namespace Supermarket_mvp.Views
             txtCategoryName.Text = string.Empty;
             Description = string.Empty;
         }
-
-
-        // Evento que se dispara al hacer clic en el botón de Editar.
-        private void EditarC_Click(object sender, EventArgs e)
-        {
-            // Invoca el evento de edición.
-            EditEvent?.Invoke(this, EventArgs.Empty);
-
-            // Cambia a la pestaña de detalles para editar la categoría seleccionada.
-            if (!tabControl1.TabPages.Contains(tabSingleViewCategory))
-            {
-                tabControl1.TabPages.Add(tabSingleViewCategory);
-            }
-
-            tabControl1.SelectedTab = tabSingleViewCategory;  // Selecciona la pestaña de detalles.
-            tabSingleViewCategory.Text = "Editar categoría";
-
-            // Asegúrate de que los campos se llenen con los valores seleccionados para editar.
-        }
+   
 
 
         private void EliminarC_Click(object sender, EventArgs e)
@@ -267,31 +285,104 @@ namespace Supermarket_mvp.Views
             this.Close();
         }
 
-        //public void SetPayModeListBildingSource(BindingSource categoryList)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
         public void SetCategoryListBildingSource(BindingSource categoryList)
         {
             dataGridView1.DataSource = categoryList;
         }
 
+        //private void GuardarC_Click(object sender, EventArgs e)
+        //{
+        //    // Validar que los campos no estén vacíos y que cumplan con las restricciones del modelo
+        //    if (string.IsNullOrWhiteSpace(txtCategoryName.Text) || txtCategoryName.Text.Length < 3 || string.IsNullOrWhiteSpace(txtDescription.Text) || txtDescription.Text.Length < 3)
+        //    {
+        //        MessageBox.Show("El nombre de la categoría debe tener al menos 3 caracteres y la descripción también.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+
+        //    // Asignar los valores del formulario al modelo
+        //    var categories = new Categories
+        //    {
+        //        Name = txtCategoryName.Text,
+        //        Description = txtDescription.Text
+        //    };
+
+        //    // Invocar el evento de guardado, el presenter maneja la lógica de persistencia
+        //    SaveEvent?.Invoke(this, EventArgs.Empty);
+
+        //    // Verificar si la operación fue exitosa
+        //    if (IsSuccessful)
+        //    {
+        //        MessageBox.Show("Categoría guardada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        tabControl1.TabPages.Remove(tabSingleViewCategory);
+        //        tabControl1.TabPages.Add(tabListViewCategory);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        //private void GuardarC_Click(object sender, EventArgs e)
+        //{
+        //    // Validar que el nombre de la categoría y la descripción no estén vacíos
+        //    if (string.IsNullOrWhiteSpace(txtCategoryName.Text) || string.IsNullOrWhiteSpace(txtDescription.Text))
+        //    {
+        //        MessageBox.Show("El nombre de la categoría y la descripción son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return; // Detener el proceso de guardado si los campos están vacíos
+        //    }
+
+        //    // Crear una instancia del modelo y asignar valores
+        //    var categories = new Categories
+        //    {
+        //        CategoryId = int.TryParse(txtCategoryId.Text, out int id) ? id : 0,  // Asignar el ID de la categoría
+        //        Name = txtCategoryName.Text,    // Asignar el nombre de la categoría
+        //        Description = txtDescription.Text  // Asignar la descripción
+        //    };
+
+        //    // Aquí podrías realizar una validación de las anotaciones de datos si es necesario.
+        //    var context = new ValidationContext(categories, null, null);
+        //    var results = new List<ValidationResult>();
+        //    if (!Validator.TryValidateObject(categories, context, results, true))
+        //    {
+        //        // Mostrar el primer error de validación encontrado
+        //        MessageBox.Show(results[0].ErrorMessage, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+
+        //    // Invoca el evento de guardado, que debería manejar el presenter
+        //    SaveEvent?.Invoke(this, EventArgs.Empty);
+
+        //    // Verifica si la operación fue exitosa
+        //    if (IsSuccessful)
+        //    {
+        //        MessageBox.Show("Categoría guardada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        tabControl1.TabPages.Remove(tabSingleViewCategory);
+        //        tabControl1.TabPages.Add(tabListViewCategory);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
         private void GuardarC_Click(object sender, EventArgs e)
         {
-            // Validar campos antes de guardar
+            // Asegúrate de validar los campos
             if (string.IsNullOrWhiteSpace(txtCategoryName.Text) || string.IsNullOrWhiteSpace(txtDescription.Text))
             {
                 MessageBox.Show("El nombre de la categoría y la descripción son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // Detener el proceso de guardado si hay un error
+                return;
             }
 
-            // Invoca el evento de guardado
+            // Invoca el evento SaveEvent que será manejado por el Presenter
             SaveEvent?.Invoke(this, EventArgs.Empty);
 
             // Verifica si la operación fue exitosa
-            if (IsSuccessful)
+            if (isSuccesful) // Si la operación de guardado fue exitosa
             {
                 MessageBox.Show("Categoría guardada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Regresar a la pestaña principal de la lista
                 tabControl1.TabPages.Remove(tabSingleViewCategory);
                 tabControl1.TabPages.Add(tabListViewCategory);
             }
@@ -300,6 +391,8 @@ namespace Supermarket_mvp.Views
                 MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
 

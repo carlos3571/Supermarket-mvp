@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket_mvp.Models
 {
-    internal class Categories
+    public class Categories
     {
         [DisplayName("CategoryId")]
         public int CategoryId { get; set; }

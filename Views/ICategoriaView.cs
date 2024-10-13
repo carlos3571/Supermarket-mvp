@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket_mvp.Views
 {
-    internal interface ICategoriaView
+    public interface ICategoriaView
     {
         int CategoryId { get; set; }
         string Name { get; set; }
