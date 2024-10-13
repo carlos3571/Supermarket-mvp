@@ -29,9 +29,9 @@ namespace Supermarket_mvp._Repositories
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
                     command.CommandText = "INSERT INTO Providers (Name, Address, PhoneNumber, Email) VALUES (@Name, @Address, @PhoneNumber, @Email)";
                     command.Parameters.Add("@name", SqlDbType.NVarChar).Value = providersModel.Name;
-                    command.Parameters.Add("@description", SqlDbType.NVarChar).Value = providersModel.Address;
-                    command.Parameters.Add("@description", SqlDbType.NVarChar).Value = providersModel.Email;
-                    command.Parameters.Add("@description", SqlDbType.NVarChar).Value = providersModel.PhoneNumber;
+                    command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = providersModel.Address;
+                    command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = providersModel.Email;
+                    command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = providersModel.PhoneNumber;
                     command.ExecuteNonQuery();
 
                 }
