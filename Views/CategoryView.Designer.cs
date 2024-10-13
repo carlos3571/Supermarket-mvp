@@ -44,7 +44,7 @@
             GuardarC = new Button();
             txtDescription = new TextBox();
             Label4 = new Label();
-            Name = new TextBox();
+            txtCategoryName = new TextBox();
             label3 = new Label();
             txtCategoryId = new TextBox();
             label2 = new Label();
@@ -174,7 +174,7 @@
             tabSingleViewCategory.Controls.Add(GuardarC);
             tabSingleViewCategory.Controls.Add(txtDescription);
             tabSingleViewCategory.Controls.Add(Label4);
-            tabSingleViewCategory.Controls.Add(Name);
+            tabSingleViewCategory.Controls.Add(txtCategoryName);
             tabSingleViewCategory.Controls.Add(label3);
             tabSingleViewCategory.Controls.Add(txtCategoryId);
             tabSingleViewCategory.Controls.Add(label2);
@@ -227,14 +227,14 @@
             Label4.TabIndex = 4;
             Label4.Text = "Description";
             // 
-            // Name
+            // txtCategoryName
             // 
-            Name.BackColor = SystemColors.InactiveCaption;
-            Name.Location = new Point(18, 174);
-            Name.Name = "Name";
-            Name.PlaceholderText = "Name";
-            Name.Size = new Size(360, 23);
-            Name.TabIndex = 3;
+            txtCategoryName.BackColor = SystemColors.InactiveCaption;
+            txtCategoryName.Location = new Point(18, 174);
+            txtCategoryName.Name = "txtCategoryName";
+            txtCategoryName.PlaceholderText = "txtCategoryName";
+            txtCategoryName.Size = new Size(360, 23);
+            txtCategoryName.TabIndex = 3;
             // 
             // label3
             // 
@@ -244,7 +244,7 @@
             label3.Name = "label3";
             label3.Size = new Size(54, 20);
             label3.TabIndex = 2;
-            label3.Text = "Name";
+            label3.Text = "txtCategoryName";
             // 
             // CategoryIdTextbox
             // 
@@ -271,7 +271,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(tabControl1);
-            //Name = "CategoryView";
+            //txtCategoryName = "CategoryView";
             Text = "CategoryView";
             tabControl1.ResumeLayout(false);
             tabListViewCategory.ResumeLayout(false);
@@ -297,7 +297,7 @@
         private Button Buscar;
         private TextBox txtDescription;
         private Label Label4;
-        private TextBox Name;
+        private TextBox txtCategoryName;
         private Label label3;
         private TextBox txtCategoryId;
         private Label label2;

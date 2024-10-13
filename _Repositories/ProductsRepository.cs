@@ -25,8 +25,8 @@ namespace Supermarket_mvp._Repositories
                     connection.Open();
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
-                    command.CommandText = "INSERT INTO Products (,Name,Description ,Price,CategoryId) VALUES (@Name, @Description, @Price, @CategoryId)";
-                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = producModel.Name;
+                    command.CommandText = "INSERT INTO Products (,txtCategoryName,Description ,Price,CategoryId) VALUES (@txtCategoryName, @Description, @Price, @CategoryId)";
+                    command.Parameters.Add("@txtCategoryName", SqlDbType.NVarChar).Value = producModel.Name;
                     command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = producModel.Description;
                     command.Parameters.Add("@Price", SqlDbType.NVarChar).Value = producModel.Price;
                     command.Parameters.Add("@CategoryId", SqlDbType.Int).Value = producModel.CategoryId;
@@ -63,12 +63,12 @@ namespace Supermarket_mvp._Repositories
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
                     command.CommandText = @"UPDATE Products
-                                       SET Name =@Name,
+                                       SET txtCategoryName =@txtCategoryName,
                                        Description = @Description
                                        Price = @Price
                                        CategoryId = @CategoryId
                                        WHERE ProviderId =@id";
-                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = producModel.Name;
+                    command.Parameters.Add("@txtCategoryName", SqlDbType.NVarChar).Value = producModel.Name;
                     command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = producModel.Description;
                     command.Parameters.Add("@Price", SqlDbType.NVarChar).Value = producModel.Price;
                     command.Parameters.Add("@CategoryId", SqlDbType.Int).Value = producModel.CategoryId;
@@ -96,7 +96,7 @@ namespace Supermarket_mvp._Repositories
                             var product = new Product();
                             product.ProductId = (int)reader["ProductId"];
                             product.Description = reader["Description"].ToString();
-                            product.Name = reader["Name"].ToString();
+                            product.Name = reader["txtCategoryName"].ToString();
                             product.Price = (int)reader["Price"];
                             product.CategoryId = (int)reader["CategoryId"];
                             productsList.Add(product);
@@ -122,10 +122,10 @@ namespace Supermarket_mvp._Repositories
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = @"SELECT * FROM Products
-                                        WHERE ProductId = @id or Name LIKE @name+ '%'
+                                        WHERE ProductId = @id or txtCategoryName LIKE @name+ '%'
                                         ORDER BY ProductId DESC";
                 command.Parameters.Add("@ProductId", SqlDbType.Int).Value = ProductId;
-                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = Name;
+                command.Parameters.Add("@txtCategoryName", SqlDbType.NVarChar).Value = Name;
                 command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Description;
                 command.Parameters.Add("@Price",SqlDbType.Decimal).Value= Price;
                 command.Parameters.Add("@CategoryId", SqlDbType.Int).Value = CategoryId;
@@ -135,7 +135,7 @@ namespace Supermarket_mvp._Repositories
                     {
                         var product = new Product();
                         product.ProductId = (int)reader["ProductId"];
-                        product.Name = reader["Name"].ToString();
+                        product.Name = reader["txtCategoryName"].ToString();
                         product.Description = reader["Description"].ToString();
                         product.Price = (decimal)reader["Price"];
                         product.CategoryId = (int)reader["CategoryId"];

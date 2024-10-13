@@ -25,7 +25,7 @@ namespace Supermarket_mvp._Repositories
         //        connection.Open();
         //        command.Connection = connection;
         //        command.commandText = "insertar en los valores del modo de pago (@nombre, @observación)";
-        //        command.Parameters.Add("@name", sqlDbType.NVarChar).Value = payModeModel.Name;
+        //        command.Parameters.Add("@name", sqlDbType.NVarChar).Value = payModeModel.txtCategoryName;
         //        command.Parameters.Add("@observation", SqlDbType.NVarChar).value = payModeModel.Observation;
         //        command.ExecuteNonQuery();
 

@@ -80,9 +80,9 @@ namespace Supermarket_mvp.Views
             GuardarC.Click += delegate
             {
                 // Verifica si los campos están vacíos antes de intentar guardar
-                if (string.IsNullOrWhiteSpace(Name.Text) || string.IsNullOrWhiteSpace(txtDescription.Text))
+                if (string.IsNullOrWhiteSpace(txtCategoryName.Text) || string.IsNullOrWhiteSpace(txtDescription.Text))
                 {
-                    MessageBox.Show("Pay Mode Name and Pay Mode Observation are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Pay Mode txtCategoryName and Pay Mode Observation are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; // Detener el proceso de guardado
                 }
 
@@ -202,15 +202,20 @@ namespace Supermarket_mvp.Views
             AddNewEvent?.Invoke(this, EventArgs.Empty);
 
             // Cambia a la pestaña de detalles para agregar la nueva categoría.
-            tabControl1.TabPages.Remove(tabListViewCategory);
-            tabControl1.TabPages.Add(tabSingleViewCategory);
+            if (!tabControl1.TabPages.Contains(tabSingleViewCategory))
+            {
+                tabControl1.TabPages.Add(tabSingleViewCategory);
+            }
+
+            tabControl1.SelectedTab = tabSingleViewCategory;  // Selecciona la pestaña de detalles.
             tabSingleViewCategory.Text = "Agregar nueva categoría";
 
             // Limpia los campos para asegurarse de que no haya datos previos.
             CategoryId = 0;  // Establece el ID en 0 para nuevos elementos.
-            Name.Text = string.Empty;
+            txtCategoryName.Text = string.Empty;
             Description = string.Empty;
         }
+
 
         // Evento que se dispara al hacer clic en el botón de Editar.
         private void EditarC_Click(object sender, EventArgs e)
@@ -219,12 +224,17 @@ namespace Supermarket_mvp.Views
             EditEvent?.Invoke(this, EventArgs.Empty);
 
             // Cambia a la pestaña de detalles para editar la categoría seleccionada.
-            tabControl1.TabPages.Remove(tabListViewCategory);
-            tabControl1.TabPages.Add(tabSingleViewCategory);
+            if (!tabControl1.TabPages.Contains(tabSingleViewCategory))
+            {
+                tabControl1.TabPages.Add(tabSingleViewCategory);
+            }
+
+            tabControl1.SelectedTab = tabSingleViewCategory;  // Selecciona la pestaña de detalles.
             tabSingleViewCategory.Text = "Editar categoría";
 
             // Asegúrate de que los campos se llenen con los valores seleccionados para editar.
         }
+
 
         private void EliminarC_Click(object sender, EventArgs e)
         {
@@ -267,25 +277,30 @@ namespace Supermarket_mvp.Views
 
         private void GuardarC_Click(object sender, EventArgs e)
         {
-            // Invocas el evento SaveEvent que será manejado por el Presenter
+            // Validar campos antes de guardar
+            if (string.IsNullOrWhiteSpace(txtCategoryName.Text) || string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                MessageBox.Show("El nombre de la categoría y la descripción son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Detener el proceso de guardado si hay un error
+            }
+
+            // Invoca el evento de guardado
             SaveEvent?.Invoke(this, EventArgs.Empty);
 
-            // Luego puedes mostrar un mensaje de confirmación si el guardado fue exitoso
-            if (isSuccesful) // Si Grabar fue exitoso
+            // Verifica si la operación fue exitosa
+            if (IsSuccessful)
             {
-                MessageBox.Show("La categoria se ha guardado correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Puedes volver a la pestaña principal de la lista
+                MessageBox.Show("Categoría guardada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 tabControl1.TabPages.Remove(tabSingleViewCategory);
                 tabControl1.TabPages.Add(tabListViewCategory);
             }
             else
             {
-                MessageBox.Show("Ocurrió un error al guardar el modo de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
-        
+
+
     }
 }

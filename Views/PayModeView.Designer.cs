@@ -276,7 +276,7 @@ namespace Supermarket_mvp.Views
             // 
             TxtPayModeName.Location = new Point(19, 97);
             TxtPayModeName.Name = "TxtPayModeName";
-            TxtPayModeName.PlaceholderText = "Pay Mode Name";
+            TxtPayModeName.PlaceholderText = "Pay Mode txtCategoryName";
             TxtPayModeName.Size = new Size(374, 23);
             TxtPayModeName.TabIndex = 3;
             // 
@@ -288,7 +288,7 @@ namespace Supermarket_mvp.Views
             label4.Name = "label4";
             label4.Size = new Size(106, 15);
             label4.TabIndex = 2;
-            label4.Text = "Pay Mode Name";
+            label4.Text = "Pay Mode txtCategoryName";
             // 
             // TxtPayModeId
             // 

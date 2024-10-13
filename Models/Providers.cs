@@ -13,9 +13,9 @@ namespace Supermarket_mvp.Models
         [DisplayName("Provider Id")]
         public int ProviderId { get; set; }
 
-        [DisplayName("Provider Name")]
-        [Required(ErrorMessage = "Provider Name is required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Provider Name must be between 3 and 100 characters")]
+        [DisplayName("Provider txtCategoryName")]
+        [Required(ErrorMessage = "Provider txtCategoryName is required")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Provider txtCategoryName must be between 3 and 100 characters")]
         public string Name { get; set; }
 
         [DisplayName("Address")]

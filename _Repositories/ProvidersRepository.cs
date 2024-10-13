@@ -27,7 +27,7 @@ namespace Supermarket_mvp._Repositories
                     connection.Open();
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
-                    command.CommandText = "INSERT INTO Providers (Name, Address, PhoneNumber, Email) VALUES (@Name, @Address, @PhoneNumber, @Email)";
+                    command.CommandText = "INSERT INTO Providers (txtCategoryName, Address, PhoneNumber, Email) VALUES (@txtCategoryName, @Address, @PhoneNumber, @Email)";
                     command.Parameters.Add("@name", SqlDbType.NVarChar).Value = providersModel.Name;
                     command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = providersModel.Address;
                     command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = providersModel.Email;
@@ -65,12 +65,12 @@ namespace Supermarket_mvp._Repositories
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
                     command.CommandText = @"UPDATE Providers
-                                       SET Name =@Name,
+                                       SET txtCategoryName =@txtCategoryName,
                                        Address = @Address
                                        PhoneNumber = @PhoneNumber
                                        Email = @Email
                                        WHERE ProviderId =@id";
-                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = providersModel.Name;
+                    command.Parameters.Add("@txtCategoryName", SqlDbType.NVarChar).Value = providersModel.Name;
                     command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = providersModel.Address;
                     command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = providersModel.PhoneNumber;
                     command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = providersModel.Email;
@@ -98,7 +98,7 @@ namespace Supermarket_mvp._Repositories
                             var providers = new Providers();
                             providers.ProviderId = (int)reader["ProviderId"];
                             providers.Address = reader["Address"].ToString();
-                            providers.Name = reader["Name"].ToString();
+                            providers.Name = reader["txtCategoryName"].ToString();
                             providers.Email = reader["Email"].ToString();
                             providers.PhoneNumber = reader["PhoneNumber"].ToString();
                             providersList.Add(providers);
@@ -123,10 +123,10 @@ namespace Supermarket_mvp._Repositories
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = @"SELECT * FROM Providers
-                                        WHERE ProviderId = @id or Name LIKE @Name+ '%'
+                                        WHERE ProviderId = @id or txtCategoryName LIKE @txtCategoryName+ '%'
                                         ORDER BY ProviderId DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = ProviderId;
-                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = Name;
+                command.Parameters.Add("@txtCategoryName", SqlDbType.NVarChar).Value = Name;
                 command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = Email;
                 command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
                 command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = Address;
@@ -136,7 +136,7 @@ namespace Supermarket_mvp._Repositories
                     {
                         var providers = new Providers();
                         providers.ProviderId = (int)reader["ProviderId"];
-                        providers.Name = reader["Name"].ToString();
+                        providers.Name = reader["txtCategoryName"].ToString();
                         providers.Address = reader["Address"].ToString();
                         providers.PhoneNumber = reader["PhoneNumber"].ToString();
                         providers.Email = reader["Email"].ToString();

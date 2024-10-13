@@ -82,7 +82,7 @@ namespace Supermarket_mvp.Views
                 // Verifica si los campos están vacíos antes de intentar guardar
                 if (string.IsNullOrWhiteSpace(TxtPayModeName.Text) || string.IsNullOrWhiteSpace(TxtPayModeObservation.Text))
                 {
-                    MessageBox.Show("Pay Mode Name and Pay Mode Observation are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Pay Mode txtCategoryName and Pay Mode Observation are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; // Detener el proceso de guardado
                 }
 

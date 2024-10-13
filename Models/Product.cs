@@ -13,10 +13,10 @@ namespace Supermarket_mvp.Models
         [DisplayName("Product Id")]
         public int ProductId { get; set; }
 
-        [DisplayName("Product Name")]
-        [Required(ErrorMessage = "Product Name is required")]
+        [DisplayName("Product txtCategoryName")]
+        [Required(ErrorMessage = "Product txtCategoryName is required")]
         [StringLength(50, MinimumLength = 3,
-        ErrorMessage = "product Name must be between 3 and 50 characters")]
+        ErrorMessage = "product txtCategoryName must be between 3 and 50 characters")]
 
         public string Name { get; set; }
 

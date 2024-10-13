@@ -25,7 +25,7 @@ namespace Supermarket_mvp._Repositories
                     connection.Open();
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
-                    command.CommandText = "INSERT INTO Categories (Name, Description) VALUES (@name, @description)";
+                    command.CommandText = "INSERT INTO Categories (txtCategoryName, Description) VALUES (@name, @description)";
                     command.Parameters.Add("@name", SqlDbType.NVarChar).Value = categoriesModel.Name;
                     command.Parameters.Add("@description", SqlDbType.NVarChar).Value = categoriesModel.Description;
                     command.ExecuteNonQuery();
@@ -61,10 +61,10 @@ namespace Supermarket_mvp._Repositories
                     command.Connection = connection;
                     // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
                     command.CommandText = @"UPDATE Categories
-                                       SET Name =@Name,
+                                       SET txtCategoryName =@txtCategoryName,
                                        Description = @Description
                                        WHERE CategoryId =@id";
-                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = categoriesModel.Name;
+                    command.Parameters.Add("@txtCategoryName", SqlDbType.NVarChar).Value = categoriesModel.Name;
                     command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = categoriesModel.Description;
                     command.Parameters.Add("@id", SqlDbType.Int).Value = categoriesModel.CategoryId;
                     command.ExecuteNonQuery();
@@ -89,7 +89,7 @@ namespace Supermarket_mvp._Repositories
                         {
                             var categories = new Categories();
                             categories.CategoryId = (int)reader["CategoryId"];
-                            categories.Name = reader["Name"].ToString();
+                            categories.Name = reader["txtCategoryName"].ToString();
                             categories.Description = reader["Description"].ToString();
                             categoriesList.Add(categories);
                         }
@@ -111,7 +111,7 @@ namespace Supermarket_mvp._Repositories
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = @"SELECT * FROM Categories
-                                        WHERE CategoryId = @id or Name LIKE @name+ '%'
+                                        WHERE CategoryId = @id or txtCategoryName LIKE @name+ '%'
                                         ORDER BY CategoryId DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = categoryId;
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = Name;
@@ -122,7 +122,7 @@ namespace Supermarket_mvp._Repositories
                     {
                         var categories = new Categories();
                         categories.CategoryId = (int)reader["CategoryId"];
-                        categories.Name = reader["Name"].ToString();
+                        categories.Name = reader["txtCategoryName"].ToString();
                         categories.Description = reader["Description"].ToString();
                         categoriesList.Add(categories);
                     }
