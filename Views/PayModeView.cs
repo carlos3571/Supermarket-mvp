@@ -74,18 +74,6 @@ namespace Supermarket_mvp.Views
                 //Camnia el tituloo de la pestaña
             };
 
-            //BtnDelete.Click += delegate
-            //{
-            //    var result = MessageBox.Show(
-            //    "Está seguro que desea eliminar el modo de pago seleccionado",
-            //    "Advertencia",
-            //    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        DeleteEvent?.Invoke(this, EventArgs.Empty);
-            //        MessageBox.Show("En instantes se eliminara ");
-            //    }
-            //};
 
            
 
@@ -205,7 +193,7 @@ namespace Supermarket_mvp.Views
         {
             DgPayMode.DataSource = payModeList;
         }
-        // Patron singleton para controlar solo una instancia del formulario        
+              
         private static PayModeView _instance;
 
         public static PayModeView GetInstance(Form parentContainer)

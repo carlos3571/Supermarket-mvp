@@ -9,6 +9,7 @@ namespace Supermarket_mvp.Views
     internal interface IMainView
     {
         event EventHandler ShowPayModeView;
+        event EventHandler ShowCategoriaView;
         event EventHandler ShowProductView;
         event EventHandler ShowCustomerView;
         /*event EventHandler ShowOrderView;

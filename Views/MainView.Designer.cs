@@ -33,12 +33,14 @@
             BtnExit = new Button();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
+            Categoria = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(Categoria);
             panel1.Controls.Add(BtnExit);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(BtnPayMode);
@@ -78,6 +80,17 @@
             BtnPayMode.Size = new Size(194, 81);
             BtnPayMode.TabIndex = 2;
             BtnPayMode.UseVisualStyleBackColor = true;
+            BtnPayMode.Click += BtnPayMode_Click;
+            // 
+            // Categoria
+            // 
+            Categoria.BackgroundImage = (Image)resources.GetObject("Categoria.BackgroundImage");
+            Categoria.BackgroundImageLayout = ImageLayout.Zoom;
+            Categoria.Location = new Point(3, 146);
+            Categoria.Name = "Categoria";
+            Categoria.Size = new Size(194, 66);
+            Categoria.TabIndex = 5;
+            Categoria.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
@@ -101,5 +114,6 @@
         private PictureBox pictureBox1;
         private Button BtnPayMode;
         private Button BtnExit;
+        private Button Categoria;
     }
 }
