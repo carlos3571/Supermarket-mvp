@@ -22,7 +22,8 @@ namespace Supermarket_mvp.Views
         public CategoryView()
         {
             InitializeComponent();
-           
+            SalirC.Click += delegate { this.Close(); };
+
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabSingleViewCategory);

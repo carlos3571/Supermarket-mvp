@@ -20,6 +20,7 @@ namespace Supermarket_mvp.Views
         public ProductsView()
         {
             InitializeComponent();
+            SalirP.Click += delegate { this.Close(); };
 
             AssociateAndRaiseViewEvents();
 

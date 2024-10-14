@@ -19,6 +19,7 @@ namespace Supermarket_mvp.Views
         public ProvidersView()
         {
             InitializeComponent();
+            SalirP.Click += delegate { this.Close(); };
 
             AssociateAndRaiseViewEvents();
 
