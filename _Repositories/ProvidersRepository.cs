@@ -18,7 +18,7 @@ namespace Supermarket_mvp._Repositories
             this.connectionString = connectionstring;
         }
 
-        public void Add(Providers providersModel)
+        public void Add(Providers provider)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -26,17 +26,18 @@ namespace Supermarket_mvp._Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
-                    command.CommandText = "INSERT INTO Providers (ProviderId, Address, PhoneNumber, Email) VALUES (@ProviderId, @Address, @PhoneNumber, @Email)";
-                    command.Parameters.Add("@name", SqlDbType.NVarChar).Value = providersModel.Name;
-                    command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = providersModel.Address;
-                    command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = providersModel.Email;
-                    command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = providersModel.PhoneNumber;
-                    command.ExecuteNonQuery();
+                    command.CommandText = @"INSERT INTO Providers (Name, Address, PhoneNumber, Email) 
+                                    VALUES (@Name, @Address, @PhoneNumber, @Email)";
+                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = provider.Name;
+                    command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = provider.Address;
+                    command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = provider.PhoneNumber;
+                    command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = provider.Email;
 
+                    command.ExecuteNonQuery();
                 }
             }
         }
+
 
         public void Delete(int id)
         {
@@ -55,7 +56,7 @@ namespace Supermarket_mvp._Repositories
             }
         }
 
-        public void Edit(Providers providersModel)
+        public void Edit(Providers provider)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -63,22 +64,25 @@ namespace Supermarket_mvp._Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    // Ajustamos los nombres de las columnas según la estructura de la tabla Categories
                     command.CommandText = @"UPDATE Providers
-                                       SET Name =@Name,
-                                       Address = @Address
-                                       PhoneNumber = @PhoneNumber
-                                       Email = @Email
-                                       WHERE ProviderId =@id";
-                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = providersModel.Name;
-                    command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = providersModel.Address;
-                    command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = providersModel.PhoneNumber;
-                    command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = providersModel.Email;
-                    command.Parameters.Add("@id", SqlDbType.Int).Value = providersModel.ProviderId;
+                                    SET Name = @Name,
+                                        Address = @Address,
+                                        PhoneNumber = @PhoneNumber,
+                                        Email = @Email
+                                    WHERE ProviderId = @ProviderId";
+
+                    // Asegurarse de agregar los parámetros necesarios
+                    command.Parameters.Add("@ProviderId", SqlDbType.Int).Value = provider.ProviderId;
+                    command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = provider.Name;
+                    command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = provider.Address;
+                    command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = provider.PhoneNumber;
+                    command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = provider.Email;
+
                     command.ExecuteNonQuery();
                 }
             }
         }
+
 
         public IEnumerable<Providers> GetAll()
         {

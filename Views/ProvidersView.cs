@@ -76,7 +76,7 @@ namespace Supermarket_mvp.Views
 
                 if (string.IsNullOrWhiteSpace(TextName.Text.Trim()) || string.IsNullOrWhiteSpace(TextAddress.Text.Trim()))
                 {
-                    MessageBox.Show("Providers are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Provider are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -89,13 +89,14 @@ namespace Supermarket_mvp.Views
                     // Guardado exitoso, volver a la lista de modos de pago
                     tabControl1.TabPages.Remove(tabSingleViewProviders);
                     tabControl1.TabPages.Add(tabListViewProviders);
-                    MessageBox.Show("Categoria successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Providers successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             };
+
 
             CancelarP.Click += delegate
             {
@@ -128,7 +129,7 @@ namespace Supermarket_mvp.Views
             return _instance;
         }
 
-        private void CategoryView_Load(object sender, EventArgs e)
+        private void ProvidersView_Load(object sender, EventArgs e)
         {
             // Si estamos en modo de edición, se cargará la pestaña de edición
             if (isEdit)
@@ -272,5 +273,33 @@ namespace Supermarket_mvp.Views
         {
             dataGridView1.DataSource = providersList;
         }
+        private void GuardarP_Click(object sender, EventArgs e)
+        {
+            // Asegúrate de validar los campos
+            if (string.IsNullOrWhiteSpace(TextName.Text) || string.IsNullOrWhiteSpace(TextAddress.Text))
+            {
+                MessageBox.Show("El nombre del proveedor y la dirección son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Invoca el evento SaveEvent que será manejado por el Presenter
+            SaveEvent?.Invoke(this, EventArgs.Empty);
+
+            // Verifica si la operación fue exitosa
+            if (isSuccesful) // Si la operación de guardado fue exitosa
+            {
+                MessageBox.Show("Categoría guardada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Regresar a la pestaña principal de la lista
+                tabControl1.TabPages.Remove(tabSingleViewProviders);
+                tabControl1.TabPages.Add(tabListViewProviders);
+            }
+            else
+            {
+                MessageBox.Show(Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }

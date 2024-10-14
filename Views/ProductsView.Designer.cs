@@ -180,7 +180,7 @@
             EliminarP.Size = new Size(75, 56);
             EliminarP.TabIndex = 6;
             EliminarP.UseVisualStyleBackColor = true;
-            EliminarP.Click += button3_Click;
+            EliminarP.Click += EliminarP_Click;
             // 
             // SalirP
             // 
@@ -223,7 +223,7 @@
             label3.Size = new Size(49, 18);
             label3.TabIndex = 2;
             label3.Text = "Name";
-            label3.Click += label3_Click;
+            //label3.Click += label3_Click;
             // 
             // TextName
             // 

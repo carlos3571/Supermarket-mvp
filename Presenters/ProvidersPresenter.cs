@@ -24,7 +24,7 @@ namespace Supermarket_mvp.Presenters
 
 
             this.iProvidersView.AddNewEvent += AddNewPayMode;
-            this.iProvidersView.SaveEvent += SaveCategory;
+            this.iProvidersView.SaveEvent += SaveProviders;
             this.iProvidersView.EditEvent += LoadSelectCategoryToEdit;
             this.iProvidersView.DeleteEvent += EliminarSelectedCategories;
             this.iProvidersView.SearchEvent += Buscar;
@@ -34,6 +34,8 @@ namespace Supermarket_mvp.Presenters
 
             LoadAllProvidersList();
             this.iProvidersView.Show();
+
+
         }
         private void LoadAllProvidersList()
         {
@@ -46,34 +48,39 @@ namespace Supermarket_mvp.Presenters
             CleanViewFields();
         }
 
-        private void SaveCategory(object sender, EventArgs e)
+        private void SaveProviders(object sender, EventArgs e)
         {
-            var providers = new Providers
+            var provider = new Providers
             {
-                ProviderId = iProvidersView.ProviderId,
                 Name = iProvidersView.Name,
                 Address = iProvidersView.Address,
-                Email = iProvidersView.Email,
-                PhoneNumber=iProvidersView.PhoneNumber,
-
+                PhoneNumber = iProvidersView.PhoneNumber,
+                Email = iProvidersView.Email
             };
+
+            if (iProvidersView.IsEdit)
+            {
+                provider.ProviderId = iProvidersView.ProviderId;
+            }
 
             try
             {
                 if (iProvidersView.IsEdit)
                 {
-                    iProvidersRepository.Edit(providers);  // Se llama al método Edit del repositorio
-                    iProvidersView.Message = "Categoría editada exitosamente.";
+                    iProvidersRepository.Edit(provider);
+                    iProvidersView.Message = "Proveedor editado exitosamente.";
                 }
                 else
                 {
-                    iProvidersRepository.Add(providers);
-                    iProvidersView.Message = "Categoría agregada exitosamente.";
+                    iProvidersRepository.Add(provider);
+                    iProvidersView.Message = "Proveedor agregado exitosamente.";
                 }
 
                 iProvidersView.IsSuccessful = true;
-                LoadAllProvidersList();  // Refrescar la lista después de guardar
+                LoadAllProvidersList();
                 CleanViewFields();
+
+                
             }
             catch (Exception ex)
             {
@@ -81,6 +88,9 @@ namespace Supermarket_mvp.Presenters
                 iProvidersView.Message = $"Error inesperado: {ex.Message}";
             }
         }
+
+
+
 
 
 
@@ -149,7 +159,7 @@ namespace Supermarket_mvp.Presenters
             try
             {
                 // Se recupera el objeto de la fila seleccionada del dataviewgrid
-                var categories = (Categories)providersBindingSource.Current;
+                var categories = (Product)providersBindingSource.Current;
 
                 // Se invoca el método Delete del repositorio pasando el ID del pay mode
                 iProvidersRepository.Delete(categories.CategoryId);

@@ -28,5 +28,6 @@ namespace Supermarket_mvp.Views
 
         void SetProvidersListBildingSource(BindingSource providersList);
         void Show();
+       
     }
 }

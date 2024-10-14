@@ -299,6 +299,7 @@
             GuardarP.Size = new Size(101, 88);
             GuardarP.TabIndex = 10;
             GuardarP.UseVisualStyleBackColor = true;
+            GuardarP.Click += GuardarP_Click;
             // 
             // CancelarP
             // 

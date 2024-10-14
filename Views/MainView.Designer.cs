@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             panel1 = new Panel();
+            Proveedores = new Button();
             Productos = new Button();
             Categoria = new Button();
             BtnExit = new Button();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
-            Proveedores = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -54,11 +54,21 @@
             panel1.Size = new Size(200, 450);
             panel1.TabIndex = 0;
             // 
+            // Proveedores
+            // 
+            Proveedores.BackgroundImage = (Image)resources.GetObject("Proveedores.BackgroundImage");
+            Proveedores.BackgroundImageLayout = ImageLayout.Zoom;
+            Proveedores.Location = new Point(3, 218);
+            Proveedores.Name = "Proveedores";
+            Proveedores.Size = new Size(194, 77);
+            Proveedores.TabIndex = 7;
+            Proveedores.UseVisualStyleBackColor = true;
+            // 
             // Productos
             // 
             Productos.BackgroundImage = (Image)resources.GetObject("Productos.BackgroundImage");
             Productos.BackgroundImageLayout = ImageLayout.Zoom;
-            Productos.Location = new Point(0, 218);
+            Productos.Location = new Point(3, 301);
             Productos.Name = "Productos";
             Productos.Size = new Size(197, 75);
             Productos.TabIndex = 6;
@@ -105,16 +115,6 @@
             BtnPayMode.TabIndex = 2;
             BtnPayMode.UseVisualStyleBackColor = true;
             BtnPayMode.Click += BtnPayMode_Click;
-            // 
-            // Proveedores
-            // 
-            Proveedores.BackgroundImage = (Image)resources.GetObject("Proveedores.BackgroundImage");
-            Proveedores.BackgroundImageLayout = ImageLayout.Zoom;
-            Proveedores.Location = new Point(3, 299);
-            Proveedores.Name = "Proveedores";
-            Proveedores.Size = new Size(194, 77);
-            Proveedores.TabIndex = 7;
-            Proveedores.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
